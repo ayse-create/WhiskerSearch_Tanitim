@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhiskerSearch Sunum Paneli</title>
+    <style>
+        /* Projenin Orijinal Renk Paleti ve Tipografisi */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Üstteki Demo ve Warning Banner'ı */
+        .demo-banner {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Arama Motoru Ana Kutusu */
+        .search-container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 80px;
+            margin-bottom: 10px;
+        }
+
+        .brand-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+
+        /* Arama Çubuğu */
+        .search-box {
+            width: 100%;
+            padding: 15px 25px;
+            font-size: 16px;
+            border: 2px solid #667eea;
+            border-radius: 30px;
+            outline: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        /* Sonuç Alanı */
+        .results-container {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            display: none; /* İlk başta gizli */
+        }
+
+        /* SEO Görünümlü Sonuç Kartları */
+        .result-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .result-card:hover {
+            transform: translateY(-2px);
+            border-left: 4px solid #667eea;
+        }
+
+        .result-url {
+            font-size: 13px;
+            color: #667eea;
+        }
+
+        .result-title {
+            font-size: 18px;
+            color: #06b6d4;
+            font-weight: 600;
+            margin: 5px 0;
+        }
+
+        /* Sahnede tıklandığında açılacak Detay Sayfası / Modal */
+        .detail-page {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 999;
+            padding: 50px;
+            box-sizing: border-box;
+        }
+
+        .close-btn {
+            background: #764ba2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="demo-banner">⚠️ ProfessorCat Uyarısı! Canlı Sunum Modu Aktif</div>
+
+    <div class="search-container">
+        <div class="logo">🐱</div>
+        <div class="brand-name">WhiskerSearch</div>
+        <input type="text" id="searchInput" class="search-box" placeholder="ProfessorCat'ta ara..." autocomplete="off">
+    </div>
+
+    <div class="results-container" id="resultsContainer"></div>
+
+    <div class="detail-page" id="detailPage">
+        <button class="close-btn" onclick="closeDetail()">🔙 Geri Dön</button>
+        <div id="detailContent"></div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const detailPage = document.getElementById('detailPage');
+        const detailContent = document.getElementById('detailContent');
+
+        // Reji Enter'a bastığında tetiklenecek sahte veri tabanı
+        const database = {
+            "whiskersearch nedir": [
+                {
+                    title: "Profesör Kedi'nin Dünyasına Giriş 🐾",
+                    url: "https://www.professorcatsearch.com/about",
+                    desc: "WhiskerSearch; modern arama motorlarının o soğuk, sadece veri avlayan yapısına meydan okuyan eğlenceli bir simülasyondur! Arkada yapay zeka destekli CatAI hazır bekler. Ayrıca derinlerde keşfedilmeyi bekleyen 4 Aşamalı Gizli Bir Oyun barındırır!",
+                    detail: "<h1>🎮 Gizli 4 Aşamalı Oyun Detayları</h1><p>Kullanıcılar belirli kelimeleri arattığında arama motoru bir anda onları interaktif bir serüvene fırlatır!</p><ul><li><b>1. Aşama:</b> Kedi İllüzyonu Bulmacası</li><li><b>2. Aşama:</b> Terminal Komut Şifresi</li><li><b>3. Aşama:</b> Mantık ve Algoritma Testi</li><li><b>4. Aşama:</b> Profesör Kedi ile Final Karşılaşması</li></ul>"
+                }
+            ],
+            "whiskersearch diğer siteleri": [
+                { title: "1. Sahte Terminal Ekosistemi", url: "https://terminal.professorcat.com", desc: "Bilgisayarla doğrudan ve aracısız konuşma dilimiz olan terminal simülasyonu.", detail: "<h1>💻 Sahte Terminal Projem</h1><p>Peki ya terminal nedir? Terminal, kodların arkasındaki o sihirli siyah ekrandır. Bu sitemde kullanıcılar kod yazarak sistemi manipüle edebilirler.</p>" },
+                { title: "2. Cat-AI Yapay Zeka Arayüzü", url: "https://catai.professorcat.com", desc: "Profesör Kedi'nin akıllı asistanıyla anlık sohbet edin.", detail: "<h1>🤖 Cat-AI Yapay Zeka Entegrasyonu</h1><p>Tamamen kedi personasına sahip, esprili ve yardımcı yapay zeka sohbet robotu arayüzü.</p>" },
+                { title: "3. İletişim & Ağ", url: "https://professorcat.com/contact", desc: "Geliştiriciye ulaşın ve ağa dahil olun.", detail: "<h1>📞 İletişim Kanalları</h1><p>Benimle iletişime geçmek, yeni fikirler önermek veya projeye katkıda bulunmak için bu paneli kullanabilirsiniz.</p>" },
+                { title: "4. Değerlendirme & Yorum Paneli", url: "https://professorcat.com/review", desc: "Kullanıcı deneyimlerini ve geri bildirimleri inceleyin.", detail: "<h1>⭐ Değerlendirme Paneli</h1><p>Ziyaretçilerin sistem hakkında bıraktığı anlık puanlamalar ve yapıcı eleştiriler burada listelenir.</p>" }
+            ],
+            "whiskersearch istatistikleri": [
+                {
+                    title: "Google Search Console & My Business Performansı 📈",
+                    url: "https://analytics.professorcat.com",
+                    desc: "WhiskerSearch-ProfCat'in internet dünyasındaki gerçek ayak izleri, tıklanma oranları ve kullanıcı başarı grafikleri.",
+                    detail: "<h1>📊 Gerçek Başarı ve Performans Verileri</h1><p>Bu proje sadece yerel bir bilgisayarda çalışmıyor, Google üzerinde indekslenmiş durumda!</p><ul><li><b>Google Search Console:</b> Binlerce gösterim ve organik tıklanma performansı.</li><li><b>Google My Business:</b> Kullanıcıların haritalar ve işletme profili üzerinden bıraktığı gerçek yorumlar ve 5 yıldızlı değerlendirmeler!</li></ul>"
+                }
+            ],
+            "whiskersearch hangi araçlarla yapıldı": [
+                {
+                    title: "Arkadaki Profesör Sponsorlar ve Teknolojiler 🛠️",
+                    url: "https://github.com/ayse-create/WhiskerSearch-ProfCat",
+                    desc: "Bu dev ekosistemi tek başıma kurarken gücünden ilham aldığım profesyonel platformlar.",
+                    detail: "<h1>🎨 Profesyonel Mutfak ve Geliştirme Araçları</h1><br><h3>1. Canva</h3><p>Kolay grafik tasarımları ile web sitesi yapmayı ve görselleştirmeyi kod yazmadan başka bir seviyeye çıkarıyor!</p><h3>2. GitHub & Copilot</h3><p>Repo oluşturma, dosyaları düzenli tutma ve Copilot özelliği ile debugging (hata ayıklama) sürecini en kolay seviyeye indiren muazzam platform!</p><h3>3. ChatGPT & Gemini</h3><p>Anlamadığım, yapamadığım o parçalanmış kodları anında telafi etmede ve bana yepyeni fikirler önermede çok işime yaradılar!</p>"
+                }
+            ]
+        };
+
+        // Dinamik Arama Motoru Mantığı
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.toLowerCase().trim();
+                resultsContainer.innerHTML = '';
+                
+                if (database[query]) {
+                    resultsContainer.style.display = 'block';
+                    database[query].forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'result-card';
+                        card.innerHTML = `
+                            <div class="result-url">${item.url}</div>
+                            <div class="result-title">${item.title}</div>
+                            <p>${item.desc}</p>
+                        `;
+                        // Kart tıklandığında detay sayfasını aç
+                        card.onclick = () => openDetail(item.detail);
+                        resultsContainer.appendChild(card);
+                    });
+                } else {
+                    resultsContainer.style.display = 'block';
+                    resultsContainer.innerHTML = '<p style="text-align:center;">Profesör Kedi bu kelimeyi bulamadı. (Lütfen parolayı kontrol edin) 🙀</p>';
+                }
+            }
+        });
+
+        function openDetail(content) {
+            detailContent.innerHTML = content;
+            detailPage.style.display = 'block';
+        }
+
+        function closeDetail() {
+            detailPage.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
