@@ -616,7 +616,7 @@ function performSearch() {
   const query = document.getElementById('searchInput').value;
   if (query.trim()) {
     lastSearchQuery = query;
-    showAlert();
+    showResults(); // ✅ direkt sonuç
   }
 }
 
