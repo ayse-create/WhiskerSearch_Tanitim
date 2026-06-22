@@ -1,494 +1,926 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhiskerSearch-ProfCat Grand Launch</title>
-    <style>
-        /* Modern ve Profesyonel UI Simülasyonu */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
+ <head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="hPq_WPZAvU4KE1qqk9TOxsd2XuAZEduUX5T1LQYAd-A" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhiskerSearch🐱🔎</title>
+  <link rel="icon" href="images/whiskersearch-tatli-arama.ico" type="image/x-icon" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* En Üstteki Mor Geçişli Uyarı Çubuğu */
-        .demo-banner {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            text-align: center;
-            padding: 12px;
-            font-size: 15px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.2);
-        }
+    html, body {
+      height: 100%;
+      width: 100%;
+      background: #f0f0f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
 
-        /* Ana Arama Motoru Alanı */
-        .search-container {
-            max-width: 650px;
-            margin: 60px auto 30px auto;
-            text-align: center;
-            padding: 20px;
-        }
+    .browser-container {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background: white;
+    }
 
-        .logo {
-            font-size: 90px;
-            animation: float 3s ease-in-out infinite;
-        }
+    .demo-warning {
+      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
+      color: white;
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
+    .browser-header {
+      background: #f8f9fa;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 12px 16px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
 
-        .brand-name {
-            font-size: 36px;
-            font-weight: 800;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
-        }
+    .browser-buttons {
+      display: flex;
+      gap: 8px;
+    }
 
-        .search-box-wrapper {
-            position: relative;
-        }
+    .nav-button {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #d0d0d0;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
 
-        .search-box {
-            width: 100%;
-            padding: 18px 28px;
-            font-size: 18px;
-            border: 2px solid #667eea;
-            border-radius: 50px;
-            outline: none;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-            background-color: white;
-        }
+    .nav-button:hover {
+      background: #e8e8e8;
+    }
 
-        /* Dinamik Sonuç Alanı */
-        .results-container {
-            max-width: 750px;
-            margin: 0 auto 100px auto;
-            padding: 25px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            display: none;
-        }
+    .address-bar {
+      flex: 1;
+      background: #f0f0f0;
+      border: 1px solid #d0d0d0;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .results-heading {
-            font-size: 14px;
-            color: #6c757d;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
+    .address-bar-icon {
+      color: #666;
+      font-size: 14px;
+    }
 
-        /* Gerçekçi SEO Sonuç Kartları */
-        .result-card {
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            border: 1px solid #eef2f7;
-            background: #fff;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            text-align: left;
-        }
+    .browser-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
 
-        .result-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.1);
-            border-left: 5px solid #764ba2;
-        }
+    .search-page {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+    }
 
-        .result-url {
-            font-size: 13px;
-            color: #667eea;
-            font-weight: 500;
-        }
+    .search-logo {
+      font-size: 64px;
+      margin-bottom: 30px;
+      animation: bounce 2s infinite;
+    }
 
-        .result-title {
-            font-size: 20px;
-            color: #06b6d4;
-            font-weight: 600;
-            margin: 6px 0;
-        }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
-        .result-desc {
-            font-size: 15px;
-            color: #555;
-            line-height: 1.5;
-        }
+    .search-box {
+      display: flex;
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 30px;
+    }
 
-        /* EKRANI KAPLAYAN DEVASA DETAY SUNUM SAYFALARI (MODAL) */
-        .detail-page {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #ffffff;
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 60px 10%;
-            box-sizing: border-box;
-            animation: fadeIn 0.4s ease forwards;
-        }
+    .search-input {
+      flex: 1;
+      padding: 14px 18px;
+      border: 2px solid #e0e0e0;
+      border-radius: 50px 0 0 50px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
+    .search-input:focus {
+      border-color: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);;
+    }
 
-        .close-btn {
-            position: fixed;
-            top: 30px; right: 5%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
-            transition: all 0.2s;
-            z-index: 1001;
-        }
+    .search-button {
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
+      border: none;
+      border-radius: 0 50px 50px 0;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
 
-        .close-btn:hover { transform: scale(1.05); }
+    .search-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
 
-        /* Sunum İçerik Tasarımları */
-        .sunum-header {
-            font-size: 32px;
-            font-weight: 800;
-            color: #764ba2;
-            margin-bottom: 30px;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 15px;
-            text-align: left;
-        }
+    .alert-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s;
+    }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            margin-top: 20px;
-            text-align: left;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-        .grid-3 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 25px;
-            margin-top: 30px;
-        }
+    .alert-box {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.4s;
+    }
 
-        .sunum-img {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 2px solid #eef2f7;
-        }
+    @keyframes slideUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
 
-        .logo-img {
-            height: 60px;
-            object-fit: contain;
-            margin-bottom: 15px;
-        }
+    .alert-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: wobble 0.6s;
+    }
 
-        .game-step {
-            background: #fdf2e9;
-            border-left: 5px solid #e67e22;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 0 12px 12px 0;
-        }
+    @keyframes wobble {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+    }
 
-        .tool-card {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 16px;
-            text-align: center;
-            border: 1px solid #e9ecef;
-            transition: transform 0.2s;
-        }
+    .alert-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 10px;
+    }
 
-        .tool-card:hover { transform: translateY(-5px); }
-        .tool-card h3 { color: #764ba2; margin-top: 10px; margin-bottom: 10px; }
+    .alert-message {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
 
-        .reji-helper {
-            position: fixed;
-            bottom: 10px; right: 10px;
-            background: rgba(0,0,0,0.8);
-            color: #fff;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-size: 11px;
-            font-family: monospace;
-            pointer-events: none;
-            z-index: 10000;
-        }
-    </style>
-</head>
-<body>
+    .alert-button {
+      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
 
-    <div class="demo-banner">🐱 PROFESSORCAT UYARISI: CANLI LANSMAN EKOSİSTEMİ AKTİF [cite: 19]</div>
+    .alert-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
 
-    <div class="search-container">
-        <div class="logo">🐱</div>
-        <div class="brand-name">WhiskerSearch</div>
-        <div class="search-box-wrapper">
-            <input type="text" id="searchInput" class="search-box" placeholder="ProfessorCat'ta ara..." autocomplete="off" readonly>
+    .results-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: white;
+    }
+
+    .result-item {
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border-left: 4px solid #CFEFFF;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .result-item:hover {
+      background: #f0f0f0;
+      transform: translateX(5px);
+    }
+
+    .result-url {
+      font-size: 13px;
+      color: #06b6d4;
+      margin-bottom: 8px;
+    }
+
+    .result-title {
+      font-size: 18px;
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .result-description {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .result-content {
+      flex: 1;
+    }
+
+    .ai-chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: white;
+      padding: 20px 30px;
+    }
+
+    .ai-messages {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      display: flex;
+      margin-bottom: 15px;
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .message.ai {
+      justify-content: flex-start;
+    }
+
+    .message-bubble {
+      max-width: 70%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      word-wrap: break-word;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .message.user .message-bubble {
+      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
+      color: white;
+    }
+
+    .message.ai .message-bubble {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .ai-input-area {
+      display: flex;
+      gap: 10px;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 15px;
+    }
+
+    .ai-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .ai-input:focus {
+      border-color: #CFEFFF;
+    }
+
+    .ai-send-button {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .ai-send-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .tabs-container {
+      display: flex;
+      gap: 30px;
+      padding: 15px 30px;
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      overflow-x: auto;
+    }
+
+    .tab {
+      padding: 8px 0;
+      border: none;
+      background: none;
+      color: #666;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+
+    .tab.active {
+      color: #FFD1E8;
+      border-bottom-color: #FFD1E8;
+    }
+
+    .tab:hover {
+      color: #333;
+    }
+
+    .images-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      padding: 20px 30px;
+      background: white;
+    }
+
+    .image-item {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #FFD1E8; 0%, #D8C7FF; 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .image-item:hover {
+      transform: scale(1.05);
+      border-color: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .ai-response {
+      padding: 30px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 300px;
+      text-align: center;
+    }
+
+    .ai-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    .ai-text {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .ai-subtext {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 30px;
+      max-width: 400px;
+    }
+
+    .ai-button {
+      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .ai-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .videos-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px 30px;
+      background: white;
+    }
+
+    .video-item {
+      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
+      border-radius: 8px;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .video-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .shopping-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      padding: 20px 30px;
+      background: white;
+    }
+
+    .product-item {
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .product-item:hover {
+      border-color: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+    }
+
+    .product-image {
+      font-size: 60px;
+      margin-bottom: 10px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .product-price {
+      font-size: 16px;
+      color: #CFEFFF;
+      font-weight: 700;
+    }
+
+    .tab-content {
+      display: none;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .tab-content.active {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ <script src="/_sdk/telemetry_sdk.js"></script>
+  <script type="module">
+import * as webllm from "https://esm.run/@mlc-ai/web-llm";
+
+window.engine = new webllm.MLCEngine();
+
+window.loadModel = async () => {
+  const selectedModel = "Qwen2.5-1.5B-Instruct-q4f16_1-MLC";
+
+  await window.engine.reload(selectedModel);
+
+  console.log("CatAI hazır!");
+};
+
+window.loadModel();
+</script>
+ </head>
+ <body>
+  <div class="browser-container"><!-- Demo Uyarısı -->
+   <div class="demo-warning">
+    ⚠️ Bu bir demo/tarayıcı simülasyonudur - Eğlence amaçlıdır
+   </div><!-- Browser Header -->
+   <div class="browser-header">
+    <div class="browser-buttons"><button class="nav-button" onclick="goBack()">←</button> <button class="nav-button" onclick="goForward()">→</button> <button class="nav-button" onclick="reload()">↻</button>
+    </div>
+    <div class="address-bar"><span class="address-bar-icon">🔒</span> <span>https://www.professorcatsearch.com</span>
+    </div>
+   </div><!-- Browser Content -->
+   <div class="browser-content" id="browserContent">
+    <div class="search-page">
+     <div class="search-logo">
+      🐱
+     </div>
+     <div class="search-box"><input type="text" class="search-input" id="searchInput" placeholder="ProfessorCat'ta ara..." onkeypress="handleSearch(event)"> <button class="search-button" onclick="performSearch()">Ara</button>
+     </div>
+    </div>
+   </div>
+  </div><!-- Alert Modal -->
+  <div class="alert-overlay" id="alertOverlay" style="display: none;">
+   <div class="alert-box">
+    <div class="alert-icon">
+     🐱
+    </div>
+    <div class="alert-title">
+     ProfessorCat uyarısı!
+    </div>
+    <div class="alert-message">
+     Bu arama sonuçları ProfessorCat tarafından işlenmiştir. Devam etmek için tıklayın.
+    </div><button class="alert-button" onclick="confirmAlert()">Devam Et</button>
+   </div>
+  </div>
+  <script>
+    let lastSearchQuery = '';
+    let canvaLink = 'https://www.canva.com/design/DAGrke6nXUY/OdOciaHr0CxE1haEmn-IeA/view?utm_content=DAGrke6nXUY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h31ec2b4051';
+    let currentTab = 'all';
+    let history = [];
+    let historyIndex = -1;
+
+    
+
+    function goHome() {
+      history = [];
+      historyIndex = -1;
+      document.getElementById('browserContent').innerHTML = `
+        <div class="search-page">
+         <div class="search-logo">
+          🐱
+         </div>
+         <div class="search-box">
+          <input type="text" class="search-input" id="searchInput" placeholder="ProfessorCat'ta ara..." onkeypress="handleSearch(event)"> <button class="search-button" onclick="performSearch()">Ara</button>
+         </div>
         </div>
-    </div>
+      `;
+    }
 
-    <div class="results-container" id="resultsContainer">
-        <div class="results-heading" id="resultsHeading">ProfessorCat arama sonuçlarını listeledi...</div>
-        <div id="resultsList"></div>
-    </div>
+    function handleSearch(event) {
+      if (event.key === 'Enter') {
+        performSearch();
+      }
+    }
 
-    <div class="detail-page" id="detailPage">
-        <button class="close-btn" onclick="closeDetail()">🔙 Arama Sonuçlarına Dön</button>
-        <div id="detailContent"></div>
-    </div>
+    function performSearch() {
+      const query = document.getElementById('searchInput').value;
+      if (query.trim()) {
+        lastSearchQuery = query;
+        showAlert();
+      }
+    }
 
-    <div class="reji-helper">Reji Tuşları: 1, 2, 3, 4 | Alt Sayfalar: A, S, D, F</div>
+    function showAlert() {
+      document.getElementById('alertOverlay').style.display = 'flex';
+    }
 
-    <script>
-        const searchInput = document.getElementById('searchInput');
-        const resultsContainer = document.getElementById('resultsContainer');
-        const resultsHeading = document.getElementById('resultsHeading');
-        const resultsList = document.getElementById('resultsList');
-        const detailPage = document.getElementById('detailPage');
-        const detailContent = document.getElementById('detailContent');
+    function confirmAlert() {
+      document.getElementById('alertOverlay').style.display = 'none';
+      showResults();
+    }
 
-        const sunumData = {
-            1: {
-                query: "whiskersearch nedir",
-                heading: "WhiskerSearch Nedir? & Gizli Yapay Zeka Modu",
-                results: [
-                    {
-                        title: "Profesör Kedi'nin Dünyası ve Akıllı CatAI Asistanı 🐾",
-                        url: "https://www.whiskersearch.com/about-catai",
-                        desc: "Modern arama motorlarının o soğuk, sadece veri avlayan yapısına meydan okuyan; kedi personasıyla donatılmış interaktif bir web ekosistemi. Yapay zeka entegrasyonu ve kullanıcıyı içine çeken sürpriz oyun dinamikleri barındırır.",
-                        action: "openStep1()"
-                    }
-                ]
-            },
-            2: {
-                query: "whiskersearch diğer siteleri",
-                heading: "'WhiskerSearch Diğer Siteleri' için 4 Büyük Sonuç Bulundu",
-                results: [
-                    { title: "💻 1. Sahte Terminal Ekosistemi", url: "https://terminal.whiskersearch.com", desc: "Bilgisayarla doğrudan ve aracısız konuşma dilimiz olan siyah ekran simülasyonu.", action: "openSubSite('terminal')" },
-                    { title: "🤖 2. Cat-AI Yapay Zeka Arayüzü", url: "https://catai.whiskersearch.com", desc: "Profesör Kedi'nin akıllı asistanıyla anlık konuşabileceğiniz yapay zeka arayüz simülasyonu.", action: "openSubSite('catai')" },
-                    { title: "📞 3. İletişim & Ağ Paneli (Contact)", url: "https://whiskersearch.com/contact", desc: "Geliştirici kimlik kartları ve ağ bağlantılarının merkezi yönetim alanı.", action: "openSubSite('contact')" },
-                    { title: "⭐ 4. Değerlendirme & Yorum Paneli", url: "https://whiskersearch.com/review", desc: "Kullanıcıların sisteme bıraktığı anlık geri bildirimler ve puanlama paneli.", action: "openSubSite('review')" }
-                ]
-            },
-            3: {
-                query: "whiskersearch istatistikleri",
-                heading: "Performans, Google Search Console ve My Business İstatistikleri",
-                results: [
-                    {
-                        title: "Gerçek İnternet Ayak İzleri ve Başarı Tablosu 📈",
-                        url: "https://console.whiskersearch.com/analytics",
-                        desc: "WhiskerSearch-ProfCat'in Google indekslenme performansı, harita gösterimleri, kullanıcı tıklama oranları ve büyüme grafikleri.",
-                        action: "openStep3()"
-                    }
-                ]
-            },
-            4: {
-                query: "whiskersearch hangi araçlarla yapıldı",
-                heading: "Geliştirme Mutfağı: Profesör Sahneler ve Altyapı Sponsorları",
-                results: [
-                    {
-                        title: "Sistemin İnşa Edilmesini Sağlayan Yeni Nesil Profesyonel Platformlar 🛠️",
-                        url: "https://github.com/ayse-create/mutfak",
-                        desc: "Projenin sıfırdan zirveye taşınmasında kod bloklarını telafi eden, tasarımları uçuran vizyoner araçların analizi.",
-                        action: "openStep4()"
-                    }
-                ]
-            }
-        };
+    function switchTab(tabName) {
+      currentTab = tabName;
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(`${tabName}-content`).classList.add('active');
+    }
 
-        // REJİ KLAVYE TETİKLEME DİNLEYİCİSİ
-        document.addEventListener('keydown', function(e) {
-            const key = e.key.toUpperCase();
+    function showResults() {
+      const browserContent = document.getElementById('browserContent');
+      const query = lastSearchQuery;
 
-            if (sunumData[key]) {
-                closeDetail();
-                searchInput.value = sunumData[key].query;
-                resultsContainer.style.display = 'block';
-                resultsHeading.innerText = sunumData[key].heading;
-                resultsList.innerHTML = '';
+      const content = `
+        <div style="display: flex; align-items: center; padding: 20px 30px; background: #f9f9f9; border-bottom: 1px solid #e0e0e0;">
+          <div class="search-box" style="max-width: 600px; margin: 0;">
+            <input 
+              type="text" 
+              class="search-input" 
+              value="${query}" 
+              onkeypress="handleSearch(event)" 
+              style="max-width: none;"
+            >
+            <button class="search-button" onclick="performSearch()">Ara</button>
+          </div>
+        </div>
 
-                sunumData[key].results.forEach(res => {
-                    const card = document.createElement('div');
-                    card.className = 'result-card';
-                    card.innerHTML = `
-                        <div class="result-url">${res.url}</div>
-                        <div class="result-title">${res.title}</div>
-                        <div class="result-desc">${res.desc}</div>
-                    `;
-                    card.setAttribute('onclick', res.action);
-                    resultsList.appendChild(card);
-                });
-            }
+        <div class="tabs-container">
+          <button class="tab active" onclick="switchTab('all')">🔍 Tümü</button>
+          <button class="tab" onclick="switchTab('images')">🖼️ Görseller</button>
+          <button class="tab" onclick="switchTab('videos')">🎬 Videolar</button>
+          <button class="tab" onclick="switchTab('shopping')">🛍️ Alışveriş</button>
+          <button class="tab" onclick="switchTab('ai')">✨ AI Modu</button>
+        </div>
 
-            if (key === 'A') openSubSite('terminal');
-            if (key === 'S') openSubSite('catai');
-            if (key === 'D') openSubSite('contact');
-            if (key === 'F') openSubSite('review');
-        });
-
-        // 1. AŞAMA SUNUM İÇERİĞİ: AI VE GİZLİ OYUN
-        function openStep1() {
-            detailContent.innerHTML = `
-                <div class="sunum-header">🐾 WhiskerSearch Nedir & 4 Aşamalı Gizli Oyun Serüveni [cite: 7]</div>
-                <div class="grid-2">
-                    <div>
-                        <p style="font-size:18px; line-height:1.6;"><b>Geleneksel Arama Motorlarına Eğlenceli Başkaldırı! [cite: 8]</b></p>
-                        <p style="font-size:16px; color:#555; line-height:1.6;">WhiskerSearch, sadece statik bir web sayfası değildir; arka planda yapay zeka destekli <b>CatAI</b> modunu barındıren, kullanıcıyı aktif bir katılımcıya dönüştüren yaşayan bir simülasyondur. [cite: 7, 8]</p>
-                        
-                        <h3 style="color:#764ba2; margin-top:30px;">🎮 Keşfedilmeyi Bekleyen 4 Aşamalı Gizli Oyun</h3>
-                        <div class="game-step"><b>Aşama 1: Kedi İllüzyonu Bulmacası</b> <br> <span style="font-size:14px; color:#666;">Kullanıcının karşısına çıkan ilk görsel bulmaca katmanı.</span></div>
-                        <div class="game-step"><b>Aşama 2: Terminal Komut Şifresi</b> <br> <span style="font-size:14px; color:#666;">Sistem kodlarının manipüle edildiği gizli kod giriş aşaması.</span></div>
-                        <div class="game-step"><b>Aşama 3: Mantık ve Algoritma Testi</b> <br> <span style="font-size:14px; color:#666;">Profesör Kedi'nin kullanıcıya yönelttiği yazılımsal zeka soruları.</span></div>
-                        <div class="game-step"><b>Aşama 4: Final Karşılaşması</b> <br> <span style="font-size:14px; color:#666;">Tüm aşamaları geçen kullanıcının ekosisteme adını kazıdığı an!</span></div>
-                    </div>
-                    <div>
-                        <img class="sunum-img" src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?fm=jpg&q=80&w=600" alt="Gözlüklü Profesör Kedi">
-                        <p style="text-align:center; color:#888; font-size:13px; margin-top:10px;"><i>CatAI ve İnteraktif Oyun Arayüzü Temsili Canlı Görseli</i></p>
-                    </div>
+        <!-- Tümü -->
+        <div id="all-content" class="tab-content active">
+          <div class="results-container">
+            <div style="margin-bottom: 10px; color: #999; font-size: 14px;">
+              Sonuçlar: "${query}" için
+            </div>
+            <div class="result-item" onclick="openResult()">
+              <div class="result-content">
+                <div class="result-url">professorcatsearch.com › arama › ${query}</div>
+                <div class="result-title">ProfessorCat'ın En İyi Sonucu</div>
+                <div class="result-description">
+                  ProfessorCat sizin için özel olarak seçtiği bu kaynağı incelemenizi tavsiye eder.
                 </div>
-            `;
-            detailPage.style.display = 'block';
-        }
-
-        // 2. AŞAMA: 4 AYRI ALT SİTENİN DETAYLI SUNUMU
-        function openSubSite(site) {
-            if (site === 'terminal') {
-                detailContent.innerHTML = `
-                    <div class="sunum-header">💻 Proje 1: Sahte Terminal Ekosistemi</div>
-                    <div class="grid-2">
-                        <div>
-                            <h3 style="color:#228be6;">Peki Ya Terminal Nedir?</h3>
-                            <p style="font-size:17px; line-height:1.7; color:#444;">Terminal, bizim bilgisayarla aradaki tüm grafik arayüzleri kaldırarak, doğrudan ve aracısız konuşma dilimizdir! Yazılımcının klavyesidir.</p>
-                            <p style="font-size:16px; color:#666; line-height:1.6;">Geliştirdiğim bu sahte terminal sitesinde kullanıcılar, gerçek komut satırı mimarisini deneyimleyerek sistemi komutlarla yönlendirebiliyor, web sitenin arkasındaki çekirdek mekanizmayı manipüle edebiliyorlar.</p>
-                        </div>
-                        <div>
-                            <img class="sunum-img" src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?fm=jpg&q=80&w=600" alt="Terminal Kod Ekranı">
-                        </div>
-                    </div>
-                `;
-            } else if (site === 'catai') {
-                detailContent.innerHTML = `
-                    <div class="sunum-header">🤖 Proje 2: Cat-AI Yapay Zeka Arayüzü [cite: 8]</div>
-                    <div class="grid-2">
-                        <div>
-                            <img class="sunum-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?fm=jpg&q=80&w=600" alt="Yapay Zeka Soyut Tasarım">
-                        </div>
-                        <div>
-                            <h3 style="color:#764ba2;">Kedi Personasına Sahip Akıllı Asistan [cite: 8]</h3>
-                            <p style="font-size:17px; line-height:1.7; color:#444;">Büyük dil modellerinin gücünü, esprili ve akademik bir kedi karakteriyle birleştiren bağımsız chat modülü. [cite: 8, 28]</p>
-                            <p style="font-size:16px; color:#666; line-height:1.6;">Kullanıcılar arama yaparken sıkıldıkları an sağ alt köşedeki balona tıklayarak CatAI ile tamamen özgün, eğlenceli ve interaktif bir sohbet deneyimine geçiş yaparlar. [cite: 7, 22]</p>
-                        </div>
-                    </div>
-                `;
-            } else if (site === 'contact') {
-                detailContent.innerHTML = `
-                    <div class="sunum-header">📞 Proje 3: İletişim & Canlı Ağ Paneli (Contact)</div>
-                    <div class="grid-2">
-                        <div>
-                            <h3 style="color:#06b6d4;">Ağa Bağlanma Noktası</h3>
-                            <p style="font-size:17px; line-height:1.7; color:#444;">Kullanıcıların ve diğer geliştiricilerin ekosisteme dahil olabileceği, projeyi ileriye taşıyacak bağlantı kanallarının yönetildiği şık arayüz tasarımı.</p>
-                        </div>
-                        <div>
-                            <img class="sunum-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?fm=jpg&q=80&w=600" alt="Kartvizit ve İletişim">
-                        </div>
-                    </div>
-                `;
-            } else if (site === 'review') {
-                detailContent.innerHTML = `
-                    <div class="sunum-header">⭐ Proje 4: Değerlendirme & Canlı Yorum Paneli</div>
-                    <div class="grid-2">
-                        <div>
-                            <img class="sunum-img" src="https://images.unsplash.com/photo-1521791136366-3e250171103b?fm=jpg&q=80&w=600" alt="Geri Bildirim Yıldızlar">
-                        </div>
-                        <div>
-                            <h3 style="color:#e67e22;">Kullanıcı Deneyimi İzleme Paneli</h3>
-                            <p style="font-size:17px; line-height:1.7; color:#444;">Sistemi ziyaret eden kullanıcıların bıraktığı anlık puanlamalar, yapıcı eleştiriler ve sistem performans verilerinin sergilendiği geri bildirim paneli.</p>
-                        </div>
-                    </div>
-                `;
-            }
-            detailPage.style.display = 'block';
-        }
-
-        // 3. AŞAMA SUNUM İÇERİĞİ: GERÇEK İSTATİSTİKLER VE GOOGLE PROFILLERİ
-        function openStep3() {
-            detailContent.innerHTML = `
-                <div class="sunum-header">📊 Gerçek Başarılar ve Canlı İnternet İstatistikleri</div>
-                <p style="font-size:18px; color:#444;">Bu proje sadece yerel bir bilgisayarda dönen sanal bir tasarım değil; küresel internet ağında iz bırakan gerçek bir markadır! [cite: 1, 2]</p>
-                <div class="grid-2">
-                    <div>
-                        <h3 style="color:#764ba2;">📈 Google Search Console Verileri</h3>
-                        <p style="font-size:15px; color:#555; line-height:1.6;">Sitenin Google arama sonuçlarında indekslenmesiyle elde edilen organik gösterimler, tıklanma oranları (CTR) ve hedef anahtar kelimelerdeki yükseliş grafikleri projenin teknik SEO başarısını kanıtlıyor. [cite: 27]</p>
-                        
-                        <h3 style="color:#667eea; margin-top:30px;">🗺️ Google My Business (İşletme) Profili</h3>
-                        <p style="font-size:15px; color:#555; line-height:1.6;">Haritalar ve Google arama sonuçları üzerinden kullanıcıların projeyi bulmasını sağlayan, altında gerçek kullanıcı yorumları ve 5 yıldızlı değerlendirmeler barındıran resmi işletme profili entegrasyonu.</p>
-                    </div>
-                    <div>
-                        <img class="sunum-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?fm=jpg&q=80&w=600" alt="Yükseliş Analitik Grafiği">
-                        <p style="text-align:center; color:#888; font-size:13px; margin-top:10px;"><i>Canlı Organik Performans Grafikleri ve Google İstatistik İzleri</i></p>
-                    </div>
+              </div>
+            </div>
+            <div class="result-item" onclick="openResult()">
+              <div class="result-content">
+                <div class="result-url">professorcatsearch.com › sonuç › ${query}</div>
+                <div class="result-title">Başka Bir ProfessorCat Önerisi</div>
+                <div class="result-description">
+                  ProfessorCat'ın dış dünyaya bakışını sizin de deneyimlemenizi çok isterim.
                 </div>
-            `;
-            detailPage.style.display = 'block';
-        }
-
-        // 4. AŞAMA SUNUM İÇERİĞİ: MUTFAK (CANVA, GITHUB, AI LOGOLARIYLA)
-        function openStep4() {
-            detailContent.innerHTML = `
-                <div class="sunum-header">🛠️ Teknolojik Mutfak ve Sektörel Güç Ortakları</div>
-                <p style="font-size:18px; color:#444; margin-bottom:20px;">Bu devasa ekosistemi tek başıma ayağa kaldırırken, adeta arkamda devasa profesyonel sponsorlar varmışçasına kullandığım yeni nesil endüstriyel platformlar:</p>
-                
-                <div class="grid-3">
-                    <div class="tool-card">
-                        <img class="logo-img" src="https://www.vectorlogo.zone/logos/canva/canva-icon.svg" alt="Canva Logo">
-                        <h3>1. Canva</h3>
-                        <p style="font-size:14px; color:#555; line-height:1.5;">Kolay, esnek ve yüksek çözünürlüklü grafik tasarımları ile web sitesi görselleştirmeyi kod yazmadan bambaşka bir kreatif seviyeye çıkarıyor!</p>
-                    </div>
-                    <div class="tool-card">
-                        <img class="logo-img" src="https://www.vectorlogo.zone/logos/github/github-icon.svg" alt="GitHub Logo">
-                        <h3>2. GitHub & Copilot</h3>
-                        <p style="font-size:14px; color:#555; line-height:1.5;">Repolar oluşturarak tüm kaynak dosyalarımı düzenli tutmamı, sürüm kontrolü yapmamı [cite: 4] ve Copilot yapay zekasıyla debugging (hata ayıklama) süreçlerini en hızlı seviyeye indirmemi sağlayan ana üs!</p>
-                    </div>
-                    <div class="tool-card">
-                        <img class="logo-img" src="https://www.vectorlogo.zone/logos/openai/openai-icon.svg" alt="OpenAI Logo">
-                        <h3>3. ChatGPT & Gemini</h3>
-                        <p style="font-size:14px; color:#555; line-height:1.5;">Anlamadığım, mantık hatası yaptığım veya optimize edilmesi gereken parçalanmış kod bloklarımı hızla telafi etmemde ve tıkandığım anlarda bana yepyeni vizyoner fikirler sunmada en büyük kod ortağım!</p>
-                    </div>
+              </div>
+            </div>
+            <div class="result-item" onclick="openResult()">
+              <div class="result-content">
+                <div class="result-url">professorcatsearch.com › tavsiye › ${query}</div>
+                <div class="result-title">ProfessorCat'ın Özel Seçimi</div>
+                <div class="result-description">
+                  Bu bağlantı ProfessorCat tarafından titizlikle incelendi ve onaylandı!
                 </div>
-                <div style="margin-top:40px;">
-                    <img class="sunum-img" style="max-height: 250px; width: 100%; object-fit: cover;" src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?fm=jpg&q=80&w=1200" alt="Yazılım Geliştirme Kod Mutfağı">
-                </div>
-            `;
-            detailPage.style.display = 'block';
-        }
+              </div>
+            </div>
+          </div>
+        </div>
 
-        function closeDetail() {
-            detailPage.style.display = 'none';
+        <!-- Görseller -->
+        <div id="images-content" class="tab-content">
+          <div class="images-grid">
+            <div class="image-item" onclick="openResult()">😺</div>
+            <div class="image-item" onclick="openResult()">😸</div>
+            <div class="image-item" onclick="openResult()">😻</div>
+            <div class="image-item" onclick="openResult()">😽</div>
+            <div class="image-item" onclick="openResult()">😼</div>
+            <div class="image-item" onclick="openResult()">😹</div>
+            <div class="image-item" onclick="openResult()">😾</div>
+            <div class="image-item" onclick="openResult()">😿</div>
+            <div class="image-item" onclick="openResult()">🐱</div>
+            <div class="image-item" onclick="openResult()">😺</div>
+            <div class="image-item" onclick="openResult()">😸</div>
+            <div class="image-item" onclick="openResult()">😻</div>
+          </div>
+        </div>
+
+        <!-- Videolar -->
+        <div id="videos-content" class="tab-content">
+          <div class="videos-container">
+            <div class="video-item" onclick="openResult()">▶️ 🐱</div>
+            <div class="video-item" onclick="openResult()">▶️ 😹</div>
+            <div class="video-item" onclick="openResult()">▶️ 😸</div>
+            <div class="video-item" onclick="openResult()">▶️ 🐱</div>
+            <div class="video-item" onclick="openResult()">▶️ 😻</div>
+            <div class="video-item" onclick="openResult()">▶️ 😼</div>
+          </div>
+        </div>
+
+        <!-- Alışveriş -->
+        <div id="shopping-content" class="tab-content">
+          <div class="shopping-container">
+            <div class="product-item" onclick="openResult()">
+              <div class="product-image">🐱</div>
+              <div class="product-name">ProfessorCat Tişört</div>
+              <div class="product-price">₺199</div>
+            </div>
+            <div class="product-item" onclick="openResult()">
+              <div class="product-image">😸</div>
+              <div class="product-name">Kedi Şapkası</div>
+              <div class="product-price">₺149</div>
+            </div>
+            <div class="product-item" onclick="openResult()">
+              <div class="product-image">😹</div>
+              <div class="product-name">Mugs Kedi</div>
+              <div class="product-price">₺79</div>
+            </div>
+            <div class="product-item" onclick="openResult()">
+              <div class="product-image">😻</div>
+              <div class="product-name">Kedi Bilezik</div>
+              <div class="product-price">₺99</div>
+            </div>
+            <div class="product-item" onclick="openResult()">
+              <div class="product-image">😼</div>
+              <div class="product-name">Kedi Çorap</div>
+              <div class="product-price">₺49</div>
+            </div>
+            <div class="product-item" onclick="openResult()">
+              <div class="product-image">😽</div>
+              <div class="product-name">Kedi Hoodie</div>
+              <div class="product-price">₺299</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Modu -->
+        <div id="ai-content" class="tab-content">
+          <div class="ai-chat-container">
+            <div class="ai-messages" id="aiMessages">
+              <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; gap: 20px;">
+                <div style="font-size: 80px;">🤖</div>
+                <div style="font-size: 32px; font-weight: 700; color: #333;">CatAI</div>
+                <div style="font-size: 16px; color: #666; max-width: 400px; text-align: center;">
+                  ProfessorCat'ın yapay zeka asistanı ile sohbet edin. Bir soru sorun ve hazır olun!
+                </div>
+              </div>
+            </div>
+            <div class="ai-input-area">
+              <input type="text" class="ai-input" id="aiInput" placeholder="Bir soru sor..." onkeypress="handleAIMessage(event)">
+              <button class="ai-send-button" onclick="sendAIMessage()">Gönder</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      browserContent.innerHTML = content;
+      
+      // Geçmişe ekle
+      historyIndex++;
+      history = history.slice(0, historyIndex);
+      history.push({ type: 'results', query: query });
+    }
+
+    function handleAIMessage(event) {
+      if (event.key === 'Enter') {
+        sendAIMessage();
+      }
+    }
+
+    async function sendAIMessage() {
+      const input = document.getElementById('aiInput');
+      const message = input.value.trim();
+      
+      if (!message) return;
+
+      const messagesContainer = document.getElementById('aiMessages');
+      
+      // Kullanıcı mesajı ekle
+      const userMessageDiv = document.createElement('div');
+      userMessageDiv.className = 'message user';
+      userMessageDiv.innerHTML = `<div class="message-bubble">${message}</div>`;
+      messagesContainer.appendChild(userMessageDiv);
+
+      // Input temizle
+      input.value = '';
+
+      // AI cevabı ekle
+      try {
+
+  const aiMessageDiv = document.createElement('div');
+  aiMessageDiv.className = 'message ai';
+  aiMessageDiv.innerHTML =
+    '<div class="message-bubble">CatAI düşünüyor...</div>';
+
+  messagesContainer.appendChild(aiMessageDiv);
+
+  const response =
+    await window.engine.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content:
+            "Sen CatAI adlı Türkçe konuşan yardımcı bir yapay zekasın. Her zaman Türkçe cevap ver."
+        },
+        {
+          role: "user",
+          content: message
         }
-    </script>
-</body>
+      ]
+    });
+
+  aiMessageDiv.innerHTML =
+    `<div class="message-bubble">${response.choices[0].message.content}</div>`;
+
+}
+catch (err) {
+
+  const aiMessageDiv = document.createElement('div');
+  aiMessageDiv.className = 'message ai';
+  aiMessageDiv.innerHTML =
+    `<div class="message-bubble">Hata: ${err.message}</div>`;
+
+  messagesContainer.appendChild(aiMessageDiv);
+}
+
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function openResult() {
+      window.open(canvaLink, '_blank', 'noopener,noreferrer');
+    }
+
+    function goBack() {
+      if (historyIndex > 0) {
+        historyIndex--;
+        const page = history[historyIndex];
+        if (page.type === 'results') {
+          lastSearchQuery = page.query;
+          showResults();
+        }
+      }
+    }
+
+    function goForward() {
+      if (historyIndex < history.length - 1) {
+        historyIndex++;
+        const page = history[historyIndex];
+        if (page.type === 'results') {
+          lastSearchQuery = page.query;
+          showResults();
+        }
+      }
+    }
+
+    function reload() {
+      if (historyIndex >= 0 && history[historyIndex]) {
+        const page = history[historyIndex];
+        if (page.type === 'results') {
+          lastSearchQuery = page.query;
+          showResults();
+        }
+      }
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a067e003fd6fddf7',t:'MTc4MDU4NTkzOA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
