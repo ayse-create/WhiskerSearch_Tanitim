@@ -600,10 +600,6 @@ window.loadModel();
   <script>
 let lastSearchQuery = '';
 
-/* =========================
-   SEARCH INPUT
-========================= */
-
 function handleSearch(event) {
   if (event.key === 'Enter') performSearch();
 }
@@ -619,10 +615,6 @@ function performSearch() {
   showResults();
 }
 
-/* =========================
-   RESULTS ENGINE
-========================= */
-
 function showResults() {
   const box = document.getElementById('browserContent');
   if (!box) return;
@@ -630,60 +622,35 @@ function showResults() {
   let resultHTML = '';
 
   if (lastSearchQuery.includes("whiskersearch")) {
-    resultHTML = resultCard(
-      "WhiskerSearch Nedir?",
-      "whiskersearch › about",
-      "WhiskerSearch hakkında bilgi",
-      "openInfo"
-    );
+    resultHTML = resultCard("WhiskerSearch Nedir?", "info › whiskersearch", "Hakkında sayfası", "openInfo");
   }
 
-  else if (lastSearchQuery.includes("istatistik")) {
-    resultHTML = resultCard(
-      "Tıklanma İstatistikleri",
-      "google › search-console",
-      "Performans verileri",
-      "openStats"
-    );
+  else if (lastSearchQuery.includes("terminal")) {
+    resultHTML = resultCard("Terminal Sistemi", "whiskersearch › terminal", "Terminal hakkında bilgi", "openTerminal");
   }
 
-  else if (lastSearchQuery.includes("başarı")) {
-    resultHTML = resultCard(
-      "GSC Başarıları",
-      "google › performance",
-      "Sistem başarı raporu",
-      "openSuccess"
-    );
+  else if (lastSearchQuery.includes("iletişim")) {
+    resultHTML = resultCard("İletişim Sayfası", "whiskersearch › contact", "İletişim bilgileri", "openContact");
   }
 
-  else if (lastSearchQuery.includes("business") || lastSearchQuery.includes("yorum")) {
-    resultHTML = resultCard(
-      "My Business",
-      "google › business",
-      "Yorumlar ve geri bildirimler",
-      "openBusiness"
-    );
+  else if (lastSearchQuery.includes("feedback")) {
+    resultHTML = resultCard("Feedback Sayfası", "whiskersearch › feedback", "Geri bildirim sistemi", "openFeedback");
+  }
+
+  else if (lastSearchQuery.includes("404")) {
+    resultHTML = resultCard("404 Sayfası", "error › 404", "Hata sayfası", "open404");
+  }
+
+  else if (lastSearchQuery.includes("gsc") || lastSearchQuery.includes("istatistik")) {
+    resultHTML = resultCard("WhiskerSearch – Google Search Console Verileri", "google › search console", "Performans verileri", "openStats");
   }
 
   else {
-    resultHTML = resultCard(
-      "404 - Bulunamadı",
-      "error › 404",
-      "Bu arama için sonuç yok",
-      "open404"
-    );
+    resultHTML = resultCard("404 - Bulunamadı", "error › 404", "Sonuç yok", "open404");
   }
 
-  box.innerHTML = `
-    <div class="results-container">
-      ${resultHTML}
-    </div>
-  `;
+  box.innerHTML = `<div class="results-container">${resultHTML}</div>`;
 }
-
-/* =========================
-   RESULT CARD
-========================= */
 
 function resultCard(title, url, desc, action) {
   return `
@@ -696,101 +663,189 @@ function resultCard(title, url, desc, action) {
 }
 
 /* =========================
-   YOUR FULL PARAGRAPH PAGE
+   FULL CONTENT PAGES (VERBATIM)
 ========================= */
 
 function openInfo() {
   document.getElementById('browserContent').innerHTML = `
     <div style="padding:30px;">
+<h1>WhiskerSearch Nedir?</h1>
 
-      <h1>WhiskerSearch Nedir?</h1>
+<p>WhiskerSearch, sizi sahte bir arama motoruyla karşılayan, ancak tüm sonuçların ProfessorCat tarafından hazırlandığı interaktif bir deneyimdir.</p>
 
-      <p>WhiskerSearch, sizi sahte bir arama motoruyla karşılayan, ancak tüm sonuçların ProfessorCat tarafından hazırlandığı interaktif bir deneyimdir.</p>
+<h2>Sahte Arama Motoru</h2>
 
-      <h2>Sahte Arama Motoru</h2>
+<p>Bu bölümde, sahte bir arama motoruyla karşılaşırsınız. Ne ararsanız arayın, sonuçlar ProfessorCat tarafından işlenmiştir. Görseller, videolar ve içerikler her zaman aynı kalır.</p>
 
-      <p>Bu bölümde, sahte bir arama motoruyla karşılaşırsınız. Ne ararsanız arayın, sonuçlar ProfessorCat tarafından işlenmiştir. Görseller, videolar ve içerikler her zaman aynı kalır.</p>
+<h2>Sonuçlar</h2>
 
-      <h2>Sonuçlar</h2>
+<p>Çıkan sonuçlarda, hangi bağlantıya tıklarsanız tıklayın, sizi dört aşamalı bir oyuna yönlendirir.</p>
 
-      <p>Çıkan sonuçlarda, hangi bağlantıya tıklarsanız tıklayın, sizi dört aşamalı bir oyuna yönlendirir.</p>
+<h3>Aşama 1: Ödev Desteği:</h3>
 
-      <h3>Aşama 1: Ödev Desteği:</h3>
+<p>ProfessorCat, ödev, sınav ve word gibi akademik görevlerinizde size destek sunar.</p>
 
-      <p>ProfessorCat, ödev, sınav ve word gibi akademik görevlerinizde size destek sunar.</p>
+<h3>Aşama 2: Çevre Koruma:</h3>
 
-      <h3>Aşama 2: Çevre Koruma:</h3>
+<p>Burada ağaç dikme, sulama, atıkları ayırma, tabelaları onarma ve evdeki israfları bulma gibi görevler yer alır.</p>
 
-      <p>Burada ağaç dikme, sulama, atıkları ayırma, tabelaları onarma ve evdeki israfları bulma gibi görevler yer alır.</p>
+<h3>Aşama 3: Restoran Siparişi:</h3>
 
-      <h3>Aşama 3: Restoran Siparişi:</h3>
+<p>İlk olarak salata yaparken, sonraki aşamada hamburger, en sonunda ise pizza yaparsınız. Adımları sırasıyla takip edip puan kazanırsınız.</p>
 
-      <p>İlk olarak salata yaparken, sonraki aşamada hamburger, en sonunda ise pizza yaparsınız. Adımları sırasıyla takip edip puan kazanırsınız.</p>
+<h3>Aşama 4: Ev Düzenleme:</h3>
 
-      <h3>Aşama 4: Ev Düzenleme:</h3>
+<p>Salon, mutfak ve yatak odasını temizleyip düzenleyerek puan toplarsınız.</p>
 
-      <p>Salon, mutfak ve yatak odasını temizleyip düzenleyerek puan toplarsınız.</p>
+<h2>Görseller, Videolar ve Alışveriş</h2>
 
-      <h2>Görseller, Videolar ve Alışveriş</h2>
-
-      <p>Bu kategorilerde, sahte kedi emojileri, videoları ve gerçek olmayan ürünler bulabilirsiniz. Yapay zekamız olan CatAI henüz Türkçe cümle kurmakta zorlanmakta, ancak matematiksel işlemlerinde başarılıdır. Daha gelişmiş bir AI deneyimi için WhiskerAI kullanabilirsiniz.</p>
-
-      <button onclick="location.reload()">Geri</button>
-
-    </div>
-  `;
+<p>Bu kategorilerde, sahte kedi emojileri, videoları ve gerçek olmayan ürünler bulabilirsiniz.Yapay zekamız olan CatAI henüz Türkçe cümle kurmakta zorlanmakta, ancak matematıksel işlemlerinde başarılı. Daha gelişmiş bir Al deneyimi için WhiskerAl kullanabilirsiniz.</p>
+    </div>`;
 }
 
-/* =========================
-   OTHER PAGES
-========================= */
+function openTerminal() {
+  document.getElementById('browserContent').innerHTML = `
+    <div style="padding:30px;">
+
+<h1>Terminal Nedir?</h1>
+
+<p>Terminal, görsel düğmeler veya grafiksel arayüzler kullanmadan, yalnızca klavyeden girilen komutlarla bilgisayarın işletim sistemine erişmeyi sağlayan bir araçtır. Günümüzde birçok yazılımcı, sistem yöneticisi ve geliştirici tarafından kullanılmaktadır. İlk bakışta karmaşık görünse de aslında bilgisayarla doğrudan iletişim kurmanın en temel yollarından biridir.</p>
+
+<h2>WhiskerSearch Terminal Sistemi</h2>
+
+<p>WhiskerSearch içerisinde bulunan Terminal sistemi, gerçek terminallerden ilham alınarak hazırlanmıştır. Bu sistem sayesinde kullanıcılar belirli komutlar yazarak farklı sayfalara ulaşabilir, gizli içerikleri keşfedebilir ve sistemin nasıl çalıştığını daha yakından inceleyebilirler.</p>
+
+<p>Terminal ekranında yapılan işlemler fare yerine klavye ile gerçekleştirilir. Kullanıcılar belirli komutları yazarak sonuçlar elde eder ve sistemin verdiği yanıtları inceleyebilirler. Böylece klasik web sayfalarından farklı bir deneyim sunulur.</p>
+
+<h2>Kullanılabilecek Komutlar</h2>
+
+<p>Terminal içerisinde yazılan her komut farklı bir görevi yerine getirir. Bazı komutlar bilgi verirken bazıları belirli sayfaları açabilir veya sistem hakkında detaylı bilgiler gösterebilir.</p>
+
+<p>Bu bölümde komutların ne işe yaradığını gösteren örnekler ve ekran görüntülerine yer verilecektir.</p>
+
+<h2>Gerçek Terminaller ile Karşılaştırma</h2>
+
+<p>WhiskerSearch Terminal sistemi eğlence ve öğrenme amacıyla hazırlanmıştır. Ancak gerçek terminaller çok daha gelişmiş özelliklere sahiptir. Örneğin yazılımcılar terminal kullanarak dosya oluşturabilir, program çalıştırabilir, sunuculara bağlanabilir ve bilgisayar üzerinde birçok işlemi doğrudan gerçekleştirebilir.</p>
+
+<h2>Visual Studio Code Örneği</h2>
+
+<p>Günümüzde en yaygın kullanılan terminallerden biri de Visual Studio Code içerisinde bulunan terminaldir. Kullanıcılar Terminal → New Terminal seçeneğini kullanarak terminal ekranını açabilirler.</p>
+
+    </div>`;
+}
+
+function openContact() {
+  document.getElementById('browserContent').innerHTML = `
+    <div style="padding:30px;">
+
+<h1>İletişim Sayfası</h1>
+
+<p>İletişim sayfası, kullanıcıların WhiskerSearch ekibiyle hızlı şekilde iletişime geçebilmesi için oluşturulmuştur.</p>
+
+<h2>İletişim Kur Butonu</h2>
+
+<p>Bu sayfada bir iletişim formu bulunmaz. Bunun yerine “İletişim Kur” butonu vardır. Bu butona tıklandığında kullanıcı doğrudan e-posta gönderme ekranına yönlendirilir.</p>
+
+<p>Kullanıcı burada mesajını yazıp göndererek ekip ile iletişime geçebilir.</p>
+
+<h2>Kullanım Amacı</h2>
+
+<p>Bu sayfanın amacı kullanıcıların:</p>
+
+<p>* Hata bildirmesi<br>* Öneri sunması<br>* Geri bildirim vermesi<br>* Geliştirme fikirlerini paylaşması</p>
+
+<p>gibi durumlarda hızlı şekilde ulaşabilmesini sağlamaktır.</p>
+
+    </div>`;
+}
+
+function openFeedback() {
+  document.getElementById('browserContent').innerHTML = `
+    <div style="padding:30px;">
+
+<h1>Feedback (Geri Bildirim) Sayfası</h1>
+
+<p>Feedback sayfası, kullanıcıların WhiskerSearch hakkında deneyimlerini paylaşabildiği etkileşimli bir alandır.</p>
+
+<h2>Kedi Slider (Puanlama Sistemi)</h2>
+
+<p>Bu sayfada klasik puanlama yerine sürüklenebilir bir kedi slider’ı bulunur. Kullanıcı kediyi yukarıdan aşağıya sürükleyerek deneyimini puanlar.</p>
+
+<p>Slider farklı seviyelerde farklı geri bildirimler üretir:</p>
+
+<p>* Yüksek puan: teşekkür ve olumlu mesajlar<br>* Orta puan: geliştirme önerileri<br>* Düşük puan: sistemin iyileştirilmesi gerektiğini belirten mesajlar</p>
+
+<h2>Yorum Sistemi</h2>
+
+<p>Kullanıcılar ayrıca yorum bırakabilir. Bu yorumlar puanla birlikte gönderilir.</p>
+
+<p>Her kayıt şu bilgileri içerir:</p>
+
+<p>* Yorum metni<br>* Verilen puan<br>* Tarih<br>* Saat</p>
+
+<h2>Veri Toplama Sistemi</h2>
+
+<p>Tüm geri bildirimler Google Tablolar (Google Sheets) üzerinde toplanır. Bu sistem Apps Script ile çalışır.</p>
+
+<p>Yani kullanıcı bir yorum gönderdiğinde:</p>
+
+<p>* Veri doğrudan Google Sheets’e düşer<br>* Otomatik olarak tabloya eklenir<br>* Tarih ve saat bilgisi de sistem tarafından eklenir</p>
+
+<h2>Sonuç</h2>
+
+<p>Feedback sayfası, WhiskerSearch’in kullanıcı deneyimini ölçen en önemli alanlardan biridir.</p>
+
+    </div>`;
+}
 
 function openStats() {
   document.getElementById('browserContent').innerHTML = `
     <div style="padding:30px;">
-      <h2>GSC Verileri</h2>
-      <p><b>Tıklanma:</b> 36</p>
-      <p><b>Gösterim:</b> 95</p>
-      <p><b>CTR:</b> %37,9</p>
 
-      <button onclick="location.reload()">Geri</button>
-    </div>
-  `;
-}
+<h1>WhiskerSearch – Google Search Console Verileri</h1>
 
-function openSuccess() {
-  document.getElementById('browserContent').innerHTML = `
-    <div style="padding:30px;">
-      <h2>Başarı</h2>
-      <p>Performans artışı kaydedildi.</p>
-      <button onclick="location.reload()">Geri</button>
-    </div>
-  `;
-}
+<p>Tıklanma: 36</p>
+<p>Gösterim: 95</p>
+<p>CTR: %37,9</p>
+<p>Ortalama Konum: 1,3</p>
 
-function openBusiness() {
-  document.getElementById('browserContent').innerHTML = `
-    <div style="padding:30px;">
-      <h2>My Business</h2>
-      <p>Yorumlar ve analizler.</p>
-      <button onclick="location.reload()">Geri</button>
-    </div>
-  `;
+<h2>Başarı Mesajı</h2>
+
+<p>“20 tıklanmaya ulaştığınız için tebrikler!”</p>
+
+<h2>My Business Bölümü</h2>
+
+<p>Yorumlar, puanlama sistemi ve görseller bu alanda yer alır.</p>
+
+    </div>`;
 }
 
 function open404() {
   document.getElementById('browserContent').innerHTML = `
-    <div style="padding:30px; text-align:center;">
-      <h1>404</h1>
-      <p>Sayfa bulunamadı</p>
-      <button onclick="location.reload()">Ana Sayfa</button>
-    </div>
-  `;
-}
+    <div style="padding:30px;text-align:center;">
 
-/* =========================
-   NAV
-========================= */
+<h1>404 Sayfası</h1>
+
+<p>404 sayfası, kullanıcı yanlış bir sayfaya girdiğinde karşısına çıkan hata ekranıdır.</p>
+
+<h2>Sayfa Yapısı</h2>
+
+<p>Bu sayfa WhiskerSearch evrenine uygun şekilde tasarlanmıştır. Kullanıcı bulunmayan bir sayfaya girdiğinde sistem bunu “kaybolmuş bir patı izi” gibi yorumlar.</p>
+
+<h2>Ekran Mesajı</h2>
+
+<p>“Bu sayfa belki patilerin arasında kaybolmuştur… belki de hiç var olmamıştır…”</p>
+
+<h2>Geri Dönüş</h2>
+
+<p>Kullanıcı bir buton ile ana sayfaya geri dönebilir ve arama ekranına yönlendirilir.</p>
+
+<h2>Amaç</h2>
+
+<p>404 sayfası sadece bir hata göstermek için değil, kullanıcıyı sistem içinde tutup deneyimi bozmadan geri yönlendirmek için tasarlanmıştır.</p>
+
+    </div>`;
+}
 
 function goBack(){ location.reload(); }
 function goForward(){ location.reload(); }
