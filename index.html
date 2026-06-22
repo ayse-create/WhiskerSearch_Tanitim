@@ -599,85 +599,68 @@ window.loadModel();
   
   <script>
 let lastSearchQuery = '';
-let canvaLink = 'https://www.canva.com/design/DAGrke6nXUY/OdOciaHr0CxE1haEmn-IeA/view?utm_content=DAGrke6nXUY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h31ec2b4051';
-let currentTab = 'all';
-let history = [];
-let historyIndex = -1;
 
-function goHome() {
-  location.reload();
-}
+/* =========================
+   SEARCH INPUT
+========================= */
 
 function handleSearch(event) {
   if (event.key === 'Enter') performSearch();
 }
 
 function performSearch() {
-  const query = document.getElementById('searchInput').value;
-  if (query.trim()) {
-    lastSearchQuery = query;
-    showResults(); // ✅ direkt sonuç
-  }
-}
+  const input = document.getElementById('searchInput');
+  if (!input) return;
 
-function showAlert() {
-  document.getElementById('alertOverlay').style.display = 'flex';
-}
+  const query = input.value.trim();
+  if (!query) return;
 
-function confirmAlert() {
-  document.getElementById('alertOverlay').style.display = 'none';
+  lastSearchQuery = query.toLowerCase();
   showResults();
 }
 
 /* =========================
-   🔥 GOOGLE-LIKE SEARCH ENGINE
+   RESULTS ENGINE
 ========================= */
 
 function showResults() {
-  const browserContent = document.getElementById('browserContent');
-  const q = lastSearchQuery.toLowerCase();
+  const box = document.getElementById('browserContent');
+  if (!box) return;
 
-  let resultHTML = "";
+  let resultHTML = '';
 
-  if (q.includes("whiskersearch nedir")) {
+  if (lastSearchQuery.includes("whiskersearch")) {
     resultHTML = resultCard(
       "WhiskerSearch Nedir?",
       "whiskersearch › about",
-      "WhiskerSearch hakkında detaylı bilgi",
+      "WhiskerSearch hakkında bilgi",
       "openInfo"
     );
   }
 
-  else if (q.includes("istatistik") || q.includes("tıklanma")) {
+  else if (lastSearchQuery.includes("istatistik")) {
     resultHTML = resultCard(
-      "WhiskerSearch Tıklanma İstatistikleri",
+      "Tıklanma İstatistikleri",
       "google › search-console",
-      "GSC verileri ve performans analizi",
+      "Performans verileri",
       "openStats"
     );
   }
 
-  else if (q.includes("başarı")) {
+  else if (lastSearchQuery.includes("başarı")) {
     resultHTML = resultCard(
       "GSC Başarıları",
       "google › performance",
-      "Sistem başarı raporları",
+      "Sistem başarı raporu",
       "openSuccess"
     );
   }
 
-  browserContent.innerHTML = `
-    <div class="results-container">
-      ${resultHTML}
-    </div>
-  `;
-}
-
-  else if (q.includes("business") || q.includes("yorum")) {
+  else if (lastSearchQuery.includes("business") || lastSearchQuery.includes("yorum")) {
     resultHTML = resultCard(
       "My Business",
       "google › business",
-      "Yorumlar ve kullanıcı geri bildirimleri",
+      "Yorumlar ve geri bildirimler",
       "openBusiness"
     );
   }
@@ -686,17 +669,21 @@ function showResults() {
     resultHTML = resultCard(
       "404 - Bulunamadı",
       "error › 404",
-      "Bu sayfa patilerin arasında kaybolmuştur…",
+      "Bu arama için sonuç yok",
       "open404"
     );
   }
 
-  browserContent.innerHTML = `
+  box.innerHTML = `
     <div class="results-container">
       ${resultHTML}
     </div>
   `;
 }
+
+/* =========================
+   RESULT CARD
+========================= */
 
 function resultCard(title, url, desc, action) {
   return `
@@ -709,33 +696,54 @@ function resultCard(title, url, desc, action) {
 }
 
 /* =========================
-   📄 PAGES
+   YOUR FULL PARAGRAPH PAGE
 ========================= */
 
 function openInfo() {
   document.getElementById('browserContent').innerHTML = `
     <div style="padding:30px;">
-        <h1>WhiskerSearch Nedir?</h1>
-      <p>WhiskerSearch, sizi sahte bir arama motoruyla karşılayan, ancak tüm sonuçların
-ProfessorCat tarafından hazırlandığı interaktif bir deneyimdir.</p>
-          <h2>Sahte Arama Motoru</h2>
-   <p>Bu bölümde, sahte bir arama motoruyla karşılaşırsınız. Ne ararsanız arayın, sonuçlar ProfessorCat tarafından işlenmiştir. Görseller, videolar ve içerikler her zaman aynı kalır.</p>
-   <h2>Sonuçlar</h2>
-   <p>Çıkan sonuçlarda, hangi bağlantıya tıklarsanız tıklayın, sizi dört aşamalı bir oyuna yönlendirir.</p>
-   <h3>Aşama 1: Ödev Desteği:</h3>
-   <p>ProfessorCat, ödev, sınav ve word gibi akademik görevlerinizde size destek sunar.</p>
-   <h3>Aşama 2: Çevre Koruma:</h3>
-   <p>Burada ağaç dikme, sulama, atıkları ayırma, tabelaları onarma ve evdeki israfları bulma gibi görevler yer alır.</p>
-   <h3>Aşama 3: Restoran Siparişi:</h3>
-   <p>İlk olarak salata yaparken, sonraki aşamada hamburger, en sonunda ise pizza yaparsınız. Adımları sırasıyla takip edip puan kazanırsınız.</p>
-   <h3>Aşama 4: Ev Düzenleme:</h3>
-   <p>Salon, mutfak ve yatak odasını temizleyip düzenleyerek puan toplarsınız.</p>
-   <h2>Görseller, Videolar ve Alışveriş</h2>
-   <p>Bu kategorilerde, sahte kedi emojileri, videoları ve gerçek olmayan ürünler bulabilirsiniz.Yapay zekamız olan CatAI henüz Türkçe cümle kurmakta zorlanmakta, ancak matematıksel işlemlerinde başarılı. Daha gelişmiş bir Al deneyimi için WhiskerAl kullanabilirsiniz.</p>
-      <button onclick="goHome()">Geri</button>
+
+      <h1>WhiskerSearch Nedir?</h1>
+
+      <p>WhiskerSearch, sizi sahte bir arama motoruyla karşılayan, ancak tüm sonuçların ProfessorCat tarafından hazırlandığı interaktif bir deneyimdir.</p>
+
+      <h2>Sahte Arama Motoru</h2>
+
+      <p>Bu bölümde, sahte bir arama motoruyla karşılaşırsınız. Ne ararsanız arayın, sonuçlar ProfessorCat tarafından işlenmiştir. Görseller, videolar ve içerikler her zaman aynı kalır.</p>
+
+      <h2>Sonuçlar</h2>
+
+      <p>Çıkan sonuçlarda, hangi bağlantıya tıklarsanız tıklayın, sizi dört aşamalı bir oyuna yönlendirir.</p>
+
+      <h3>Aşama 1: Ödev Desteği:</h3>
+
+      <p>ProfessorCat, ödev, sınav ve word gibi akademik görevlerinizde size destek sunar.</p>
+
+      <h3>Aşama 2: Çevre Koruma:</h3>
+
+      <p>Burada ağaç dikme, sulama, atıkları ayırma, tabelaları onarma ve evdeki israfları bulma gibi görevler yer alır.</p>
+
+      <h3>Aşama 3: Restoran Siparişi:</h3>
+
+      <p>İlk olarak salata yaparken, sonraki aşamada hamburger, en sonunda ise pizza yaparsınız. Adımları sırasıyla takip edip puan kazanırsınız.</p>
+
+      <h3>Aşama 4: Ev Düzenleme:</h3>
+
+      <p>Salon, mutfak ve yatak odasını temizleyip düzenleyerek puan toplarsınız.</p>
+
+      <h2>Görseller, Videolar ve Alışveriş</h2>
+
+      <p>Bu kategorilerde, sahte kedi emojileri, videoları ve gerçek olmayan ürünler bulabilirsiniz. Yapay zekamız olan CatAI henüz Türkçe cümle kurmakta zorlanmakta, ancak matematiksel işlemlerinde başarılıdır. Daha gelişmiş bir AI deneyimi için WhiskerAI kullanabilirsiniz.</p>
+
+      <button onclick="location.reload()">Geri</button>
+
     </div>
   `;
 }
+
+/* =========================
+   OTHER PAGES
+========================= */
 
 function openStats() {
   document.getElementById('browserContent').innerHTML = `
@@ -744,12 +752,8 @@ function openStats() {
       <p><b>Tıklanma:</b> 36</p>
       <p><b>Gösterim:</b> 95</p>
       <p><b>CTR:</b> %37,9</p>
-      <p><b>Konum:</b> 1,3</p>
 
-      <h3>Başarı</h3>
-      <p><b>20 tıklanmaya ulaştığınız için tebrikler!</b></p>
-
-      <button onclick="goHome()">Geri</button>
+      <button onclick="location.reload()">Geri</button>
     </div>
   `;
 }
@@ -757,9 +761,9 @@ function openStats() {
 function openSuccess() {
   document.getElementById('browserContent').innerHTML = `
     <div style="padding:30px;">
-      <h2>GSC Başarıları</h2>
+      <h2>Başarı</h2>
       <p>Performans artışı kaydedildi.</p>
-      <button onclick="goHome()">Geri</button>
+      <button onclick="location.reload()">Geri</button>
     </div>
   `;
 }
@@ -768,8 +772,8 @@ function openBusiness() {
   document.getElementById('browserContent').innerHTML = `
     <div style="padding:30px;">
       <h2>My Business</h2>
-      <p>Yorumlar, puanlar ve görseller burada.</p>
-      <button onclick="goHome()">Geri</button>
+      <p>Yorumlar ve analizler.</p>
+      <button onclick="location.reload()">Geri</button>
     </div>
   `;
 }
@@ -778,16 +782,19 @@ function open404() {
   document.getElementById('browserContent').innerHTML = `
     <div style="padding:30px; text-align:center;">
       <h1>404</h1>
-      <p>Bu sayfa patilerin arasında kaybolmuştur…</p>
-      <button onclick="goHome()">Ana Sayfa</button>
+      <p>Sayfa bulunamadı</p>
+      <button onclick="location.reload()">Ana Sayfa</button>
     </div>
   `;
 }
 
+/* =========================
+   NAV
+========================= */
+
 function goBack(){ location.reload(); }
 function goForward(){ location.reload(); }
 function reload(){ location.reload(); }
-
 </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a067e003fd6fddf7',t:'MTc4MDU4NTkzOA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
