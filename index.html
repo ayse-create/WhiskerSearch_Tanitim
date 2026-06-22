@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="tr">
- <head>
+<head>
   <meta charset="UTF-8">
   <meta name="google-site-verification" content="hPq_WPZAvU4KE1qqk9TOxsd2XuAZEduUX5T1LQYAd-A" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,7 +136,7 @@
     }
 
     .search-input:focus {
-      border-color: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);;
+      border-color: #D8C7FF;
     }
 
     .search-button {
@@ -155,89 +155,6 @@
       box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
     }
 
-    .alert-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      animation: fadeIn 0.3s;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .alert-box {
-      background: white;
-      border-radius: 12px;
-      padding: 40px;
-      text-align: center;
-      max-width: 400px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      animation: slideUp 0.4s;
-    }
-
-    @keyframes slideUp {
-      from {
-        transform: translateY(30px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .alert-icon {
-      font-size: 80px;
-      margin-bottom: 20px;
-      animation: wobble 0.6s;
-    }
-
-    @keyframes wobble {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(-5deg); }
-      75% { transform: rotate(5deg); }
-    }
-
-    .alert-title {
-      font-size: 28px;
-      font-weight: 700;
-      color: #333;
-      margin-bottom: 10px;
-    }
-
-    .alert-message {
-      font-size: 16px;
-      color: #666;
-      margin-bottom: 30px;
-      line-height: 1.5;
-    }
-
-    .alert-button {
-      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
-      color: white;
-      border: none;
-      padding: 12px 40px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .alert-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-    }
-
     .results-container {
       flex: 1;
       overflow-y: auto;
@@ -251,8 +168,8 @@
     .result-item {
       padding: 20px;
       background: #f9f9f9;
-      border-radius: 8px;
-      border-left: 4px solid #CFEFFF;
+      border-radius: 12px;
+      border-left: 4px solid #D8C7FF;
       cursor: pointer;
       transition: all 0.3s;
     }
@@ -260,6 +177,7 @@
     .result-item:hover {
       background: #f0f0f0;
       transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
     .result-url {
@@ -281,323 +199,158 @@
       line-height: 1.5;
     }
 
-    .result-content {
-      flex: 1;
+    /* SAYFA İÇERİK STİLLERİ */
+    .page-content {
+      padding: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
     }
 
-    .ai-chat-container {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      background: white;
-      padding: 20px 30px;
-    }
-
-    .ai-messages {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .message {
-      display: flex;
-      margin-bottom: 15px;
-    }
-
-    .message.user {
-      justify-content: flex-end;
-    }
-
-    .message.ai {
-      justify-content: flex-start;
-    }
-
-    .message-bubble {
-      max-width: 70%;
-      padding: 12px 16px;
-      border-radius: 12px;
-      word-wrap: break-word;
-      font-size: 14px;
-      line-height: 1.4;
-    }
-
-    .message.user .message-bubble {
-      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
-      color: white;
-    }
-
-    .message.ai .message-bubble {
-      background: #f0f0f0;
+    .page-content h1 {
+      font-size: 32px;
       color: #333;
-    }
-
-    .ai-input-area {
-      display: flex;
-      gap: 10px;
-      border-top: 1px solid #e0e0e0;
-      padding-top: 15px;
-    }
-
-    .ai-input {
-      flex: 1;
-      padding: 12px 16px;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-
-    .ai-input:focus {
-      border-color: #CFEFFF;
-    }
-
-    .ai-send-button {
-      padding: 12px 24px;
-      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-
-    .ai-send-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-    }
-
-    .tabs-container {
-      display: flex;
-      gap: 30px;
-      padding: 15px 30px;
-      background: white;
-      border-bottom: 1px solid #e0e0e0;
-      overflow-x: auto;
-    }
-
-    .tab {
-      padding: 8px 0;
-      border: none;
-      background: none;
-      color: #666;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      transition: all 0.3s;
-      white-space: nowrap;
-    }
-
-    .tab.active {
-      color: #FFD1E8;
-      border-bottom-color: #FFD1E8;
-    }
-
-    .tab:hover {
-      color: #333;
-    }
-
-    .images-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 15px;
-      padding: 20px 30px;
-      background: white;
-    }
-
-    .image-item {
-      aspect-ratio: 1;
-      background: linear-gradient(135deg, #FFD1E8; 0%, #D8C7FF; 100%);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 60px;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: 2px solid transparent;
-    }
-
-    .image-item:hover {
-      transform: scale(1.05);
-      border-color: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);;
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-    }
-
-    .ai-response {
-      padding: 30px;
-      background: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 300px;
-      text-align: center;
-    }
-
-    .ai-icon {
-      font-size: 80px;
-      margin-bottom: 20px;
-      animation: bounce 2s infinite;
-    }
-
-    .ai-text {
-      font-size: 24px;
-      color: #333;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    .ai-subtext {
-      font-size: 16px;
-      color: #666;
-      margin-bottom: 30px;
-      max-width: 400px;
-    }
-
-    .ai-button {
-      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
-      color: white;
-      border: none;
-      padding: 12px 40px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .ai-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-    }
-
-    .videos-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 20px 30px;
-      background: white;
-    }
-
-    .video-item {
-      background: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
-      border-radius: 8px;
-      aspect-ratio: 16/9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .video-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(102, 126, 234, 0.3);
-    }
-
-    .shopping-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      padding: 20px 30px;
-      background: white;
-    }
-
-    .product-item {
-      background: #f9f9f9;
-      border-radius: 8px;
-      padding: 15px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: 2px solid transparent;
-    }
-
-    .product-item:hover {
-      border-color: linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8);
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
-    }
-
-    .product-image {
-      font-size: 60px;
       margin-bottom: 10px;
     }
 
-    .product-name {
-      font-size: 14px;
-      font-weight: 600;
+    .page-content h2 {
+      font-size: 22px;
       color: #333;
       margin-bottom: 8px;
+      margin-top: 20px;
     }
 
-    .product-price {
+    .page-content p {
       font-size: 16px;
-      color: #CFEFFF;
-      font-weight: 700;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 15px;
     }
 
-    .tab-content {
-      display: none;
-      flex: 1;
-      overflow-y: auto;
+    .page-content ul {
+      font-size: 16px;
+      color: #666;
+      line-height: 2;
+      padding-left: 20px;
     }
 
-    .tab-content.active {
+    .image-placeholder {
+      width: 100%;
+      border-radius: 16px;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+      border: 3px dashed #ccc;
+      background: #fafafa;
+      min-height: 200px;
+      font-size: 60px;
+      color: rgba(0,0,0,0.2);
+      transition: all 0.3s;
+    }
+
+    .image-placeholder:hover {
+      border-color: #D8C7FF;
+      background: #f5f0ff;
+    }
+
+    .image-placeholder.small {
+      min-height: 150px;
+      font-size: 40px;
+    }
+
+    .info-card {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .info-card.highlight {
+      border-left: 4px solid #D8C7FF;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stats-item {
+      background: #e8f8f5;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stats-item .number {
+      font-size: 32px;
+      font-weight: 700;
+      color: #00b894;
+    }
+
+    .stats-item .label {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .terminal-box {
+      background: #2d2d2d;
+      color: #00ff41;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.8;
+      margin-top: 10px;
+      overflow-x: auto;
+    }
+
+    @media (max-width: 600px) {
+      .page-content { padding: 20px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .page-content h1 { font-size: 24px; }
+      .image-placeholder { min-height: 150px; font-size: 40px; }
     }
   </style>
-  <style>body { box-sizing: border-box; }</style>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
- <script src="/_sdk/telemetry_sdk.js"></script>
-  <script type="module">
-import * as webllm from "https://esm.run/@mlc-ai/web-llm";
+</head>
+<body>
 
-window.engine = new webllm.MLCEngine();
-
-window.loadModel = async () => {
-  const selectedModel = "Qwen2.5-1.5B-Instruct-q4f16_1-MLC";
-
-  await window.engine.reload(selectedModel);
-
-  console.log("CatAI hazır!");
-};
-
-window.loadModel();
-</script>
- </head>
- <body>
-  <div class="browser-container"><!-- Demo Uyarısı -->
-   <div class="demo-warning">
-    ⚠️ Bu bir demo/tarayıcı simülasyonudur - Eğlence amaçlıdır
-   </div><!-- Browser Header -->
-   <div class="browser-header">
-    <div class="browser-buttons"><button class="nav-button" onclick="goBack()">←</button> <button class="nav-button" onclick="goForward()">→</button> <button class="nav-button" onclick="reload()">↻</button>
-    </div>
-    <div class="address-bar"><span class="address-bar-icon">🔒</span> <span>https://www.professorcatsearch.com</span>
-    </div>
-   </div><!-- Browser Content -->
-   <div class="browser-content" id="browserContent">
-    <div class="search-page">
-     <div class="search-logo">
-      🐱
-     </div>
-     <div class="search-box"><input type="text" class="search-input" id="searchInput" placeholder="ProfessorCat'ta ara..." onkeypress="handleSearch(event)"> <button class="search-button" onclick="performSearch()">Ara</button>
-     </div>
-    </div>
-   </div>
+<div class="browser-container">
   
-  <script>
+  <!-- Demo Uyarısı -->
+  <div class="demo-warning">
+    ⚠️ Bu bir demo/tarayıcı simülasyonudur - Eğlence amaçlıdır
+  </div>
+
+  <!-- Browser Header -->
+  <div class="browser-header">
+    <div class="browser-buttons">
+      <button class="nav-button" onclick="goBack()">←</button>
+      <button class="nav-button" onclick="goForward()">→</button>
+      <button class="nav-button" onclick="reload()">↻</button>
+    </div>
+    <div class="address-bar">
+      <span class="address-bar-icon">🔒</span>
+      <span>https://www.professorcatsearch.com</span>
+    </div>
+  </div>
+
+  <!-- Browser Content -->
+  <div class="browser-content" id="browserContent">
+    <div class="search-page">
+      <div class="search-logo">🐱</div>
+      <div class="search-box">
+        <input type="text" class="search-input" id="searchInput" placeholder="ProfessorCat'ta ara..." onkeypress="handleSearch(event)">
+        <button class="search-button" onclick="performSearch()">Ara</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
 let lastSearchQuery = '';
 
 function handleSearch(event) {
@@ -608,10 +361,10 @@ function performSearch() {
   const input = document.getElementById('searchInput');
   if (!input) return;
 
-  const query = input.value.trim();
+  const query = input.value.trim().toLowerCase();
   if (!query) return;
 
-  lastSearchQuery = query.toLowerCase();
+  lastSearchQuery = query;
   showResults();
 }
 
@@ -619,237 +372,359 @@ function showResults() {
   const box = document.getElementById('browserContent');
   if (!box) return;
 
-  let resultHTML = '';
+  let results = [];
 
-  if (lastSearchQuery.includes("whiskersearch")) {
-    resultHTML = resultCard("WhiskerSearch Nedir?", "info › whiskersearch", "Hakkında sayfası", "openInfo");
+  // 1. WhiskerSearch Nedir?
+  if (lastSearchQuery.includes("whiskersearch") && 
+      (lastSearchQuery.includes("nedir") || lastSearchQuery.includes("ne") || lastSearchQuery.includes("hakkında"))) {
+    results.push({
+      title: "🐱 WhiskerSearch Nedir?",
+      url: "whiskersearch.com › hakkında",
+      desc: "ProfessorCat tarafından işlenen eğlenceli arama deneyimi. Ödev, çevre, restoran ve ev düzenleme oyunlarıyla dolu bir dünya.",
+      action: "openInfo"
+    });
   }
 
-  else if (lastSearchQuery.includes("terminal")) {
-    resultHTML = resultCard("Terminal Sistemi", "whiskersearch › terminal", "Terminal hakkında bilgi", "openTerminal");
+  // 2. Diğer Sayfalar (5 sonuç)
+  if (lastSearchQuery.includes("diğer sayfalar") || 
+      lastSearchQuery.includes("sayfalar") ||
+      (lastSearchQuery.includes("whiskersearch") && lastSearchQuery.includes("sayfa"))) {
+    results.push(
+      {
+        title: "🖥️ Terminal Sistemi",
+        url: "whiskersearch.com › terminal",
+        desc: "Klavye komutlarıyla çalışan, gizli içeriklerin keşfedildiği terminal deneyimi.",
+        action: "openTerminal"
+      },
+      {
+        title: "❓ 404 Sayfası",
+        url: "whiskersearch.com › 404",
+        desc: "Kaybolmuş pati izlerinin peşinde... WhiskerSearch'ün eğlenceli 404 hata sayfası teması.",
+        action: "open404"
+      },
+      {
+        title: "📧 İletişim Sayfası",
+        url: "whiskersearch.com › contact",
+        desc: "Hızlı iletişim için 'İletişim Kur' butonu ile e-posta gönderme sistemi.",
+        action: "openContact"
+      },
+      {
+        title: "⭐ Feedback (Geri Bildirim)",
+        url: "whiskersearch.com › feedback",
+        desc: "Kedi slider ile puanlama, yorumlar ve Google Sheets entegrasyonu.",
+        action: "openFeedback"
+      },
+      {
+        title: "🤖 WhiskerAI",
+        url: "whiskersearch.com › whiskerai",
+        desc: "Henüz Türkçe'yi öğrenen ama matematikte başarılı yapay zeka asistanı.",
+        action: "openWhiskerAI"
+      }
+    );
   }
 
-  else if (lastSearchQuery.includes("iletişim")) {
-    resultHTML = resultCard("İletişim Sayfası", "whiskersearch › contact", "İletişim bilgileri", "openContact");
+  // 3. Performans İstatistikleri
+  if (lastSearchQuery.includes("performans") || 
+      lastSearchQuery.includes("istatistik") || 
+      lastSearchQuery.includes("google") || 
+      lastSearchQuery.includes("gsc") ||
+      lastSearchQuery.includes("business")) {
+    results.push({
+      title: "📊 Performans İstatistikleri",
+      url: "whiskersearch.com › istatistik",
+      desc: "Google Search Console verileri: 36 Tıklanma, 95 Gösterim, %37,9 CTR, Ortalama Konum 1,3. Google Business entegrasyonu.",
+      action: "openStats"
+    });
   }
 
-  else if (lastSearchQuery.includes("feedback")) {
-    resultHTML = resultCard("Feedback Sayfası", "whiskersearch › feedback", "Geri bildirim sistemi", "openFeedback");
+  // Eğer hiçbir sonuç bulunamazsa
+  if (results.length === 0) {
+    results.push({
+      title: "🐾 Sonuç bulunamadı",
+      url: "whiskersearch.com › arama",
+      desc: "ProfessorCat bu konuyu henüz keşfetmedi. Farklı bir kelime deneyin miyav!",
+      action: "openInfo"
+    });
   }
 
-  else if (lastSearchQuery.includes("404")) {
-    resultHTML = resultCard("404 Sayfası", "error › 404", "Hata sayfası", "open404");
-  }
-
-  else if (lastSearchQuery.includes("gsc") || lastSearchQuery.includes("istatistik")) {
-    resultHTML = resultCard("WhiskerSearch – Google Search Console Verileri", "google › search console", "Performans verileri", "openStats");
-  }
-
-  else {
-    resultHTML = resultCard("404 - Bulunamadı", "error › 404", "Sonuç yok", "open404");
-  }
-
-  box.innerHTML = `<div class="results-container">${resultHTML}</div>`;
+  // Sonuçları ekrana yaz
+  let html = '<div class="results-container">';
+  results.forEach(r => {
+    html += `
+      <div class="result-item" onclick="${r.action}()">
+        <div class="result-url">${r.url}</div>
+        <div class="result-title">${r.title}</div>
+        <div class="result-description">${r.desc}</div>
+      </div>
+    `;
+  });
+  html += '</div>';
+  box.innerHTML = html;
 }
 
-function resultCard(title, url, desc, action) {
-  return `
-    <div class="result-item" onclick="${action}()">
-      <div class="result-url">${url}</div>
-      <div class="result-title">${title}</div>
-      <div class="result-description">${desc}</div>
+// ============================================
+// SAYFA İÇERİKLERİ
+// ============================================
+
+function openInfo() {
+  document.getElementById('browserContent').innerHTML = `
+    <div class="page-content">
+      <div class="image-placeholder">
+        🐱 Görsel Eklenecek<br><span style="font-size:14px;color:#aaa;">(images/whiskersearch-hero.png)</span>
+      </div>
+
+      <h1>🐱 WhiskerSearch Nedir?</h1>
+      <p><strong>WhiskerSearch</strong>, sizi sahte bir arama motoru ile karşılayan, ancak tüm sonuçların <strong style="color:#D8C7FF;">ProfessorCat</strong> tarafından hazırlandığı interaktif bir deneyimdir.</p>
+
+      <div class="info-card highlight">
+        <h2>🔍 Sahte Arama Motoru</h2>
+        <p>Ne ararsanız arayın, sonuçlar ProfessorCat tarafından işlenmiştir. Görseller, videolar ve içerikler her zaman aynı kalır.</p>
+      </div>
+
+      <div class="info-card">
+        <h2>🎮 4 Aşamalı Oyun</h2>
+        <ul>
+          <li><strong>📚 Aşama 1:</strong> Ödev Desteği - Ödev, sınav ve word görevlerinde yardım</li>
+          <li><strong>🌿 Aşama 2:</strong> Çevre Koruma - Ağaç dikme, atık ayırma, israfları bulma</li>
+          <li><strong>🍔 Aşama 3:</strong> Restoran Siparişi - Salata, hamburger ve pizza yapımı</li>
+          <li><strong>🏠 Aşama 4:</strong> Ev Düzenleme - Salon, mutfak, yatak odası temizliği</li>
+        </ul>
+      </div>
+
+      <div class="image-placeholder small">
+        🎨 Görsel Eklenecek<br><span style="font-size:14px;color:#aaa;">(images/whiskersearch-oyun.png)</span>
+      </div>
     </div>
   `;
 }
 
-/* =========================
-   FULL CONTENT PAGES (VERBATIM)
-========================= */
-
-function openInfo() {
-  document.getElementById('browserContent').innerHTML = `
-    <div style="padding:30px;">
-<h1>WhiskerSearch Nedir?</h1>
-
-<p>WhiskerSearch, sizi sahte bir arama motoruyla karşılayan, ancak tüm sonuçların ProfessorCat tarafından hazırlandığı interaktif bir deneyimdir.</p>
-
-<h2>Sahte Arama Motoru</h2>
-
-<p>Bu bölümde, sahte bir arama motoruyla karşılaşırsınız. Ne ararsanız arayın, sonuçlar ProfessorCat tarafından işlenmiştir. Görseller, videolar ve içerikler her zaman aynı kalır.</p>
-
-<h2>Sonuçlar</h2>
-
-<p>Çıkan sonuçlarda, hangi bağlantıya tıklarsanız tıklayın, sizi dört aşamalı bir oyuna yönlendirir.</p>
-
-<h3>Aşama 1: Ödev Desteği:</h3>
-
-<p>ProfessorCat, ödev, sınav ve word gibi akademik görevlerinizde size destek sunar.</p>
-
-<h3>Aşama 2: Çevre Koruma:</h3>
-
-<p>Burada ağaç dikme, sulama, atıkları ayırma, tabelaları onarma ve evdeki israfları bulma gibi görevler yer alır.</p>
-
-<h3>Aşama 3: Restoran Siparişi:</h3>
-
-<p>İlk olarak salata yaparken, sonraki aşamada hamburger, en sonunda ise pizza yaparsınız. Adımları sırasıyla takip edip puan kazanırsınız.</p>
-
-<h3>Aşama 4: Ev Düzenleme:</h3>
-
-<p>Salon, mutfak ve yatak odasını temizleyip düzenleyerek puan toplarsınız.</p>
-
-<h2>Görseller, Videolar ve Alışveriş</h2>
-
-<p>Bu kategorilerde, sahte kedi emojileri, videoları ve gerçek olmayan ürünler bulabilirsiniz.Yapay zekamız olan CatAI henüz Türkçe cümle kurmakta zorlanmakta, ancak matematıksel işlemlerinde başarılı. Daha gelişmiş bir Al deneyimi için WhiskerAl kullanabilirsiniz.</p>
-    </div>`;
-}
-
 function openTerminal() {
   document.getElementById('browserContent').innerHTML = `
-    <div style="padding:30px;">
+    <div class="page-content">
+      <div class="image-placeholder" style="background:linear-gradient(135deg, #2d2d2d, #1a1a1a); color:#00ff41;">
+        ⌨️ Terminal Görseli<br><span style="font-size:14px;color:#555;">(images/terminal-screenshot.png)</span>
+      </div>
 
-<h1>Terminal Nedir?</h1>
+      <h1>🖥️ Terminal Sistemi Nedir?</h1>
+      <p>Terminal, görsel düğmeler veya grafiksel arayüzler kullanmadan, <strong>yalnızca klavyeden girilen komutlarla</strong> bilgisayarın işletim sistemine erişmeyi sağlayan bir araçtır.</p>
 
-<p>Terminal, görsel düğmeler veya grafiksel arayüzler kullanmadan, yalnızca klavyeden girilen komutlarla bilgisayarın işletim sistemine erişmeyi sağlayan bir araçtır. Günümüzde birçok yazılımcı, sistem yöneticisi ve geliştirici tarafından kullanılmaktadır. İlk bakışta karmaşık görünse de aslında bilgisayarla doğrudan iletişim kurmanın en temel yollarından biridir.</p>
+      <div class="info-card highlight">
+        <h2>🔧 WhiskerSearch Terminal Sistemi</h2>
+        <p>Gerçek terminallerden ilham alınarak hazırlanmıştır. Kullanıcılar belirli komutlar yazarak farklı sayfalara ulaşabilir ve gizli içerikleri keşfedebilir.</p>
+      </div>
 
-<h2>WhiskerSearch Terminal Sistemi</h2>
+      <div class="info-card">
+        <h2>📝 Kullanılabilecek Komutlar</h2>
+        <p>Her komut farklı bir görevi yerine getirir. Bazıları bilgi verir, bazıları belirli sayfaları açar.</p>
+        <div class="terminal-box">
+          > whisker --help<br>
+          > open --page terminal<br>
+          > cat --info<br>
+          > search --query "komut"
+        </div>
+      </div>
 
-<p>WhiskerSearch içerisinde bulunan Terminal sistemi, gerçek terminallerden ilham alınarak hazırlanmıştır. Bu sistem sayesinde kullanıcılar belirli komutlar yazarak farklı sayfalara ulaşabilir, gizli içerikleri keşfedebilir ve sistemin nasıl çalıştığını daha yakından inceleyebilirler.</p>
-
-<p>Terminal ekranında yapılan işlemler fare yerine klavye ile gerçekleştirilir. Kullanıcılar belirli komutları yazarak sonuçlar elde eder ve sistemin verdiği yanıtları inceleyebilirler. Böylece klasik web sayfalarından farklı bir deneyim sunulur.</p>
-
-<h2>Kullanılabilecek Komutlar</h2>
-
-<p>Terminal içerisinde yazılan her komut farklı bir görevi yerine getirir. Bazı komutlar bilgi verirken bazıları belirli sayfaları açabilir veya sistem hakkında detaylı bilgiler gösterebilir.</p>
-
-<p>Bu bölümde komutların ne işe yaradığını gösteren örnekler ve ekran görüntülerine yer verilecektir.</p>
-
-<h2>Gerçek Terminaller ile Karşılaştırma</h2>
-
-<p>WhiskerSearch Terminal sistemi eğlence ve öğrenme amacıyla hazırlanmıştır. Ancak gerçek terminaller çok daha gelişmiş özelliklere sahiptir. Örneğin yazılımcılar terminal kullanarak dosya oluşturabilir, program çalıştırabilir, sunuculara bağlanabilir ve bilgisayar üzerinde birçok işlemi doğrudan gerçekleştirebilir.</p>
-
-<h2>Visual Studio Code Örneği</h2>
-
-<p>Günümüzde en yaygın kullanılan terminallerden biri de Visual Studio Code içerisinde bulunan terminaldir. Kullanıcılar Terminal → New Terminal seçeneğini kullanarak terminal ekranını açabilirler.</p>
-
-    </div>`;
-}
-
-function openContact() {
-  document.getElementById('browserContent').innerHTML = `
-    <div style="padding:30px;">
-
-<h1>İletişim Sayfası</h1>
-
-<p>İletişim sayfası, kullanıcıların WhiskerSearch ekibiyle hızlı şekilde iletişime geçebilmesi için oluşturulmuştur.</p>
-
-<h2>İletişim Kur Butonu</h2>
-
-<p>Bu sayfada bir iletişim formu bulunmaz. Bunun yerine “İletişim Kur” butonu vardır. Bu butona tıklandığında kullanıcı doğrudan e-posta gönderme ekranına yönlendirilir.</p>
-
-<p>Kullanıcı burada mesajını yazıp göndererek ekip ile iletişime geçebilir.</p>
-
-<h2>Kullanım Amacı</h2>
-
-<p>Bu sayfanın amacı kullanıcıların:</p>
-
-<p>* Hata bildirmesi<br>* Öneri sunması<br>* Geri bildirim vermesi<br>* Geliştirme fikirlerini paylaşması</p>
-
-<p>gibi durumlarda hızlı şekilde ulaşabilmesini sağlamaktır.</p>
-
-    </div>`;
-}
-
-function openFeedback() {
-  document.getElementById('browserContent').innerHTML = `
-    <div style="padding:30px;">
-
-<h1>Feedback (Geri Bildirim) Sayfası</h1>
-
-<p>Feedback sayfası, kullanıcıların WhiskerSearch hakkında deneyimlerini paylaşabildiği etkileşimli bir alandır.</p>
-
-<h2>Kedi Slider (Puanlama Sistemi)</h2>
-
-<p>Bu sayfada klasik puanlama yerine sürüklenebilir bir kedi slider’ı bulunur. Kullanıcı kediyi yukarıdan aşağıya sürükleyerek deneyimini puanlar.</p>
-
-<p>Slider farklı seviyelerde farklı geri bildirimler üretir:</p>
-
-<p>* Yüksek puan: teşekkür ve olumlu mesajlar<br>* Orta puan: geliştirme önerileri<br>* Düşük puan: sistemin iyileştirilmesi gerektiğini belirten mesajlar</p>
-
-<h2>Yorum Sistemi</h2>
-
-<p>Kullanıcılar ayrıca yorum bırakabilir. Bu yorumlar puanla birlikte gönderilir.</p>
-
-<p>Her kayıt şu bilgileri içerir:</p>
-
-<p>* Yorum metni<br>* Verilen puan<br>* Tarih<br>* Saat</p>
-
-<h2>Veri Toplama Sistemi</h2>
-
-<p>Tüm geri bildirimler Google Tablolar (Google Sheets) üzerinde toplanır. Bu sistem Apps Script ile çalışır.</p>
-
-<p>Yani kullanıcı bir yorum gönderdiğinde:</p>
-
-<p>* Veri doğrudan Google Sheets’e düşer<br>* Otomatik olarak tabloya eklenir<br>* Tarih ve saat bilgisi de sistem tarafından eklenir</p>
-
-<h2>Sonuç</h2>
-
-<p>Feedback sayfası, WhiskerSearch’in kullanıcı deneyimini ölçen en önemli alanlardan biridir.</p>
-
-    </div>`;
-}
-
-function openStats() {
-  document.getElementById('browserContent').innerHTML = `
-    <div style="padding:30px;">
-
-<h1>WhiskerSearch – Google Search Console Verileri</h1>
-
-<p>Tıklanma: 36</p>
-<p>Gösterim: 95</p>
-<p>CTR: %37,9</p>
-<p>Ortalama Konum: 1,3</p>
-
-<h2>Başarı Mesajı</h2>
-
-<p>“20 tıklanmaya ulaştığınız için tebrikler!”</p>
-
-<h2>My Business Bölümü</h2>
-
-<p>Yorumlar, puanlama sistemi ve görseller bu alanda yer alır.</p>
-
-    </div>`;
+      <div class="image-placeholder small" style="background:linear-gradient(135deg, #2d2d2d, #1a1a1a); color:#00ff41;">
+        💻 Terminal Ekran Görüntüsü<br><span style="font-size:14px;color:#555;">(images/terminal-ekran.png)</span>
+      </div>
+    </div>
+  `;
 }
 
 function open404() {
   document.getElementById('browserContent').innerHTML = `
-    <div style="padding:30px;text-align:center;">
+    <div class="page-content">
+      <div class="image-placeholder" style="background:linear-gradient(135deg, #FF6B6B, #ee5a24); color:white;">
+        ❓ 404 Görseli<br><span style="font-size:14px;color:rgba(255,255,255,0.5);">(images/404-cat.png)</span>
+      </div>
 
-<h1>404 Sayfası</h1>
+      <h1>❓ 404 Sayfası</h1>
+      <p><strong>WhiskerSearch 404 sayfası</strong>, kullanıcı yanlış bir sayfaya girdiğinde karşısına çıkan eğlenceli hata ekranıdır. Kaybolmuş pati izlerinin peşinde bir macera!</p>
 
-<p>404 sayfası, kullanıcı yanlış bir sayfaya girdiğinde karşısına çıkan hata ekranıdır.</p>
+      <div class="info-card highlight" style="border-color:#FF6B6B; background:#fff5f5;">
+        <h2>🐾 Ekran Mesajı</h2>
+        <p style="font-size:18px; font-style:italic;">"Bu sayfa belki patilerin arasında kaybolmuştur… belki de hiç var olmamıştır…"</p>
+      </div>
 
-<h2>Sayfa Yapısı</h2>
+      <div class="info-card">
+        <h2>🔙 Geri Dönüş</h2>
+        <p>Kullanıcı bir buton ile ana sayfaya geri dönebilir ve arama ekranına yönlendirilir. Amacı, kullanıcıyı sistem içinde tutup deneyimi bozmadan geri yönlendirmektir.</p>
+      </div>
 
-<p>Bu sayfa WhiskerSearch evrenine uygun şekilde tasarlanmıştır. Kullanıcı bulunmayan bir sayfaya girdiğinde sistem bunu “kaybolmuş bir patı izi” gibi yorumlar.</p>
-
-<h2>Ekran Mesajı</h2>
-
-<p>“Bu sayfa belki patilerin arasında kaybolmuştur… belki de hiç var olmamıştır…”</p>
-
-<h2>Geri Dönüş</h2>
-
-<p>Kullanıcı bir buton ile ana sayfaya geri dönebilir ve arama ekranına yönlendirilir.</p>
-
-<h2>Amaç</h2>
-
-<p>404 sayfası sadece bir hata göstermek için değil, kullanıcıyı sistem içinde tutup deneyimi bozmadan geri yönlendirmek için tasarlanmıştır.</p>
-
-    </div>`;
+      <div class="image-placeholder small" style="background:linear-gradient(135deg, #FF6B6B, #ee5a24); color:white;">
+        🗺️ Kayıp Pati İzi Görseli<br><span style="font-size:14px;color:rgba(255,255,255,0.5);">(images/404-pati.png)</span>
+      </div>
+    </div>
+  `;
 }
 
-function goBack(){ location.reload(); }
-function goForward(){ location.reload(); }
-function reload(){ location.reload(); }
+function openContact() {
+  document.getElementById('browserContent').innerHTML = `
+    <div class="page-content">
+      <div class="image-placeholder" style="background:linear-gradient(135deg, #74b9ff, #0984e3); color:white;">
+        📧 İletişim Görseli<br><span style="font-size:14px;color:rgba(255,255,255,0.5);">(images/contact-email.png)</span>
+      </div>
+
+      <h1>📧 İletişim Sayfası</h1>
+      <p>Kullanıcıların <strong>WhiskerSearch ekibiyle hızlı şekilde iletişime geçebilmesi</strong> için oluşturulmuştur.</p>
+
+      <div class="info-card highlight" style="border-color:#0984e3; background:#f0f8ff;">
+        <h2>📨 İletişim Kur Butonu</h2>
+        <p>Bu sayfada bir iletişim formu bulunmaz. Bunun yerine <strong>"İletişim Kur"</strong> butonu vardır. Bu butona tıklandığında kullanıcı doğrudan e-posta gönderme ekranına yönlendirilir.</p>
+        <div style="display:inline-block; background:linear-gradient(135deg, #CFEFFF, #D8C7FF, #FFD1E8); padding:12px 30px; border-radius:8px; color:white; font-weight:600; margin-top:10px;">📩 İletişim Kur</div>
+      </div>
+
+      <div class="info-card">
+        <h2>🎯 Kullanım Amacı</h2>
+        <ul>
+          <li>🐛 Hata bildirme</li>
+          <li>💡 Öneri sunma</li>
+          <li>💬 Geri bildirim verme</li>
+          <li>🚀 Geliştirme fikirlerini paylaşma</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function openFeedback() {
+  document.getElementById('browserContent').innerHTML = `
+    <div class="page-content">
+      <div class="image-placeholder" style="background:linear-gradient(135deg, #fdcb6e, #f39c12); color:white;">
+        ⭐ Feedback Görseli<br><span style="font-size:14px;color:rgba(255,255,255,0.5);">(images/feedback-slider.png)</span>
+      </div>
+
+      <h1>⭐ Feedback (Geri Bildirim) Sayfası</h1>
+      <p>Kullanıcıların WhiskerSearch hakkında deneyimlerini paylaşabildiği etkileşimli bir alandır.</p>
+
+      <div class="info-card highlight" style="border-color:#f39c12; background:#fffbeb;">
+        <h2>🐱 Kedi Slider (Puanlama Sistemi)</h2>
+        <p>Klasik puanlama yerine <strong>sürüklenebilir bir kedi slider</strong> bulunur. Kullanıcı kediyi yukarıdan aşağıya sürükleyerek deneyimini puanlar.</p>
+        <ul>
+          <li>🔺 Yüksek puan: teşekkür ve olumlu mesajlar</li>
+          <li>🔹 Orta puan: geliştirme önerileri</li>
+          <li>🔻 Düşük puan: sistemin iyileştirilmesi gerektiğini belirten mesajlar</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h2>💬 Yorum Sistemi</h2>
+        <p>Kullanıcılar yorum bırakabilir. Bu yorumlar puanla birlikte gönderilir.</p>
+        <ul>
+          <li>Yorum metni</li>
+          <li>Verilen puan</li>
+          <li>Tarih ve Saat</li>
+        </ul>
+      </div>
+
+      <div class="info-card highlight" style="border-color:#2ecc71; background:#e8f5e9;">
+        <h2>📊 Veri Toplama Sistemi</h2>
+        <p>Tüm geri bildirimler <strong>Google Tablolar (Google Sheets)</strong> üzerinde toplanır. Apps Script ile çalışır. Kullanıcı yorum gönderdiğinde veri doğrudan Google Sheets'e düşer.</p>
+      </div>
+    </div>
+  `;
+}
+
+function openWhiskerAI() {
+  document.getElementById('browserContent').innerHTML = `
+    <div class="page-content">
+      <div class="image-placeholder" style="background:linear-gradient(135deg, #6c5ce7, #a29bfe); color:white;">
+        🤖 WhiskerAI Görseli<br><span style="font-size:14px;color:rgba(255,255,255,0.5);">(images/whiskerai-robot.png)</span>
+      </div>
+
+      <h1>🤖 WhiskerAI</h1>
+      <p>WhiskerSearch'ün <strong>yapay zeka asistanı</strong>. Henüz Türkçe cümle kurmakta zorlanıyor, ancak <strong style="color:#6c5ce7;">matematiksel işlemlerinde başarılı</strong>.</p>
+
+      <div class="info-card highlight" style="border-color:#6c5ce7; background:#f3f0ff;">
+        <h2>🧮 Yetenekleri</h2>
+        <ul>
+          <li>✅ Matematik işlemleri (toplama, çıkarma, çarpma, bölme)</li>
+          <li>✅ Basit İngilizce cümle kurma</li>
+          <li>⚠️ Türkçe cümle kurmada zorlanıyor (geliştiriliyor)</li>
+          <li>🚀 Daha gelişmiş AI deneyimi için <strong>WhiskerAI Pro</strong> yakında!</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h2>💬 Örnek Diyalog</h2>
+        <div class="terminal-box">
+          <div style="color:#a29bfe;">> Kullanıcı: 15 + 27 kaçtır?</div>
+          <div style="color:#00ff41;">WhiskerAI: 15 + 27 = 42, miyav! 🐱</div>
+          <div style="color:#a29bfe;">> Kullanıcı: Bugün hava nasıl?</div>
+          <div style="color:#00ff41;">WhiskerAI: Üzgünüm, hava durumunu bilmiyorum. Ama 1+1=2, bu kesin! 😸</div>
+        </div>
+      </div>
+
+      <div class="image-placeholder small" style="background:linear-gradient(135deg, #6c5ce7, #a29bfe); color:white;">
+        🧠 Yapay Zeka Görseli<br><span style="font-size:14px;color:rgba(255,255,255,0.5);">(images/whiskerai-beyin.png)</span>
+      </div>
+    </div>
+  `;
+}
+
+function openStats() {
+  document.getElementById('browserContent').innerHTML = `
+    <div class="page-content">
+      <div class="image-placeholder" style="background:linear-gradient(135deg, #00b894, #00cec9); color:white;">
+        📊 İstatistik Görseli<br><span style="font-size:14px;color:rgba(255,255,255,0.5);">(images/stats-chart.png)</span>
+      </div>
+
+      <h1>📊 Performans İstatistikleri</h1>
+      <p><strong>Google Search Console</strong> ve <strong>Google Business</strong> entegrasyonu ile WhiskerSearch-ProfCat'in performans verileri.</p>
+
+      <div class="stats-grid">
+        <div class="stats-item">
+          <div class="number">36</div>
+          <div class="label">Tıklanma</div>
+        </div>
+        <div class="stats-item">
+          <div class="number">95</div>
+          <div class="label">Gösterim</div>
+        </div>
+        <div class="stats-item">
+          <div class="number">%37,9</div>
+          <div class="label">CTR (Tıklanma Oranı)</div>
+        </div>
+        <div class="stats-item">
+          <div class="number">1,3</div>
+          <div class="label">Ortalama Konum</div>
+        </div>
+      </div>
+
+      <div class="info-card highlight" style="border-color:#00b894; background:#d5f5e3;">
+        <h2>🏆 Başarı Mesajı</h2>
+        <p style="font-size:18px; color:#00b894; font-weight:600;">"20 tıklanmaya ulaştığınız için tebrikler!"</p>
+      </div>
+
+      <div class="info-card">
+        <h2>🏪 My Business Bölümü</h2>
+        <p>Yorumlar, puanlama sistemi ve görseller bu alanda yer alır. Google Business entegrasyonu ile işletme profili yönetimi.</p>
+      </div>
+
+      <div class="image-placeholder small" style="background:linear-gradient(135deg, #00b894, #00cec9); color:white;">
+        📈 Grafik Görseli<br><span style="font-size:14px;color:rgba(255,255,255,0.5);">(images/stats-grafik.png)</span>
+      </div>
+    </div>
+  `;
+}
+
+// ============================================
+// TARAYICI DÜĞMELERİ
+// ============================================
+
+function goBack() {
+  alert('🐱 Geri gidilecek bir sayfa yok ama ProfessorCat sizi izliyor!');
+}
+
+function goForward() {
+  alert('🐱 İleri gitmek için henüz çok erken! Önce bir arama yapın.');
+}
+
+function reload() {
+  alert('🐱 Sayfa yenilendi! ProfessorCat tekrar miyav dedi.');
+  location.reload();
+}
 </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a067e003fd6fddf7',t:'MTc4MDU4NTkzOA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</body>
 </html>
